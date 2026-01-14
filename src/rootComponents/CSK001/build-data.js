@@ -1,10 +1,20 @@
-import DataFront from "./data_Front_001.json" with { type: "json" };
+import { readFileSync, writeFileSync } from "fs";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Load JSON file
+const DataFront = JSON.parse(
+  readFileSync(join(__dirname, "./data_Front_001.json"), "utf-8"),
+);
 
 let videoData01 = [];
 let QSAWPX = 0;
+
 DataFront.forEach((groupArray) => {
   const colorSets = ["blue", "yellow"];
-
   let processedGroup = [{}];
 
   groupArray = groupArray.concat({
@@ -17,7 +27,6 @@ DataFront.forEach((groupArray) => {
 
   groupArray.forEach((e, i) => {
     let temOBJ = e;
-
     let actionsSETS = [];
 
     if (e.id) {
@@ -27,29 +36,12 @@ DataFront.forEach((groupArray) => {
       temOBJ.ClassMark = e.class;
     }
 
-    // if (e.tieude) {
-    //   actionsSETS.push({
-    //     cmd: "typingText",
-    //     text: e.tieude,
-    //     sound: true,
-    //     noTyping: true,
-    //     ToEndFrame: true,
-    //     styleCss: {
-    //       marginTop: "100px",
-    //       fontSize: "80px",
-    //       color: "yellow",
-    //       borderTop: "1px solid black",
-    //       textAlign: "center",
-    //     },
-    //   });
-    // }
-
     if (e.action) {
       if (e.action === "DEMNGUOC") {
         actionsSETS.push({
           cmd: "countdown",
           countDownFrom: 7,
-          colorTheme: "orange", // red/blue/green/purple/orange
+          colorTheme: "orange",
           zIndex: 100,
           styleCss: { scale: "2", transform: "translateY(300px)" },
         });
@@ -68,22 +60,17 @@ DataFront.forEach((groupArray) => {
             padding: "40px 60px",
             fontSize: "100px",
             fontWeight: "900",
-            color: "#FFD700", // vàng nổi
+            color: "#FFD700",
             textAlign: "center",
             background: "rgba(0,0,0,0.75)",
             borderRadius: "20px",
             border: "6px solid #FFD700",
-            boxShadow: `
-    0 0 20px #FFD700,
-    0 0 40px rgba(255,215,0,0.6)
-  `,
+            boxShadow: `0 0 20px #FFD700, 0 0 40px rgba(255,215,0,0.6)`,
             textTransform: "uppercase",
             letterSpacing: "2px",
           },
         });
-
         temOBJ.timeFixed = 4;
-
         processedGroup[0].code = "SOUNDCHUNG_SpaceSound";
         processedGroup[0].timeFixed = 1;
         processedGroup[0].actions = [
@@ -97,15 +84,12 @@ DataFront.forEach((groupArray) => {
               padding: "40px 60px",
               fontSize: "100px",
               fontWeight: "900",
-              color: "#FFD700", // vàng nổi
+              color: "#FFD700",
               textAlign: "center",
               background: "rgba(0,0,0,0.75)",
               borderRadius: "20px",
               border: "6px solid #FFD700",
-              boxShadow: `
-    0 0 20px #FFD700,
-    0 0 40px rgba(255,215,0,0.6)
-  `,
+              boxShadow: `0 0 20px #FFD700, 0 0 40px rgba(255,215,0,0.6)`,
               textTransform: "uppercase",
               letterSpacing: "2px",
             },
@@ -124,22 +108,17 @@ DataFront.forEach((groupArray) => {
             padding: "40px 60px",
             fontSize: "100px",
             fontWeight: "900",
-            color: "#FFD700", // vàng nổi
+            color: "#FFD700",
             textAlign: "center",
             background: "rgba(0,0,0,0.75)",
             borderRadius: "20px",
             border: "6px solid #FFD700",
-            boxShadow: `
-    0 0 20px #FFD700,
-    0 0 40px rgba(255,215,0,0.6)
-  `,
+            boxShadow: `0 0 20px #FFD700, 0 0 40px rgba(255,215,0,0.6)`,
             textTransform: "uppercase",
             letterSpacing: "2px",
           },
         });
-
         temOBJ.timeFixed = 4;
-
         processedGroup[0].code = "SOUNDCHUNG_SpaceSound";
         processedGroup[0].timeFixed = 1;
         processedGroup[0].actions = [
@@ -153,15 +132,12 @@ DataFront.forEach((groupArray) => {
               padding: "40px 60px",
               fontSize: "100px",
               fontWeight: "900",
-              color: "#FFD700", // vàng nổi
+              color: "#FFD700",
               textAlign: "center",
               background: "rgba(0,0,0,0.75)",
               borderRadius: "20px",
               border: "6px solid #FFD700",
-              boxShadow: `
-    0 0 20px #FFD700,
-    0 0 40px rgba(255,215,0,0.6)
-  `,
+              boxShadow: `0 0 20px #FFD700, 0 0 40px rgba(255,215,0,0.6)`,
               textTransform: "uppercase",
               letterSpacing: "2px",
             },
@@ -180,20 +156,16 @@ DataFront.forEach((groupArray) => {
             padding: "40px 60px",
             fontSize: "100px",
             fontWeight: "900",
-            color: "#FFD700", // vàng nổi
+            color: "#FFD700",
             textAlign: "center",
             background: "rgba(0,0,0,0.75)",
             borderRadius: "20px",
             border: "6px solid #FFD700",
-            boxShadow: `
-    0 0 20px #FFD700,
-    0 0 40px rgba(255,215,0,0.6)
-  `,
+            boxShadow: `0 0 20px #FFD700, 0 0 40px rgba(255,215,0,0.6)`,
             textTransform: "uppercase",
             letterSpacing: "2px",
           },
         });
-
         temOBJ.timeFixed = 4;
       }
 
@@ -263,7 +235,6 @@ DataFront.forEach((groupArray) => {
             opacity: 0,
           },
         });
-
         actionsSETS.push({
           cmd: "typingText",
           text: e.text,
@@ -272,7 +243,6 @@ DataFront.forEach((groupArray) => {
             position: "absolute",
             top: "100px",
             fontSize: "70px",
-
             borderTop: "1px solid black",
             borderRadius: "20px",
             textAlign: "left",
@@ -287,13 +257,15 @@ DataFront.forEach((groupArray) => {
     }
 
     temOBJ.actions = actionsSETS;
-
     processedGroup.push(temOBJ);
   });
 
   videoData01.push(processedGroup);
 });
 
-console.log(JSON.stringify(videoData01));
+// ✅ Save processed data to JSON file
+const outputPath = join(__dirname, "./data_processed.json");
+writeFileSync(outputPath, JSON.stringify(videoData01, null, 2));
 
-export { videoData01 };
+console.log(`✅ Data processed and saved to: ${outputPath}`);
+console.log(`📊 Total videos: ${videoData01.length}`);

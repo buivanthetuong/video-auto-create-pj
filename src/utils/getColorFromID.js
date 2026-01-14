@@ -13,7 +13,6 @@ function getColorFromId(id, offset = 0) {
   const hue = ((id + offset) * goldenRatio * 360) % 360;
   const saturation = 65 + (id % 30); // 65-95%
   const lightness = 45 + (id % 20); // 45-65%
-
   return `hsl(${Math.round(hue)}, ${saturation}%, ${lightness}%)`;
 }
 
@@ -121,29 +120,11 @@ for (let i = 1; i <= 10; i++) {
   console.log(`ID ${i}: ${getBackgroundForId(i)}`);
 }
 
-// 📤 Export for use
-module.exports = {
+// 📤 Export for use (ES modules)
+export {
   getBackgroundForId,
   generateGradientFromId,
   getPresetGradient,
   getMixedGradient,
   generateAllGradients,
 };
-
-// 🎨 Example usage in your component:
-/*
-// Import function
-const { getBackgroundForId } = require('./gradient-generator');
-
-// In your React component or CSS generation:
-const backgroundStyle = {
-  background: getBackgroundForId(props.id) // props.id từ 1-100
-};
-
-// Or directly in CSS:
-const cssString = `
-  .background-${id} {
-    background: ${getBackgroundForId(id)};
-  }
-`;
-*/

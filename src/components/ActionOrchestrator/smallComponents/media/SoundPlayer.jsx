@@ -1,9 +1,10 @@
 import React from "react";
-import { Audio, staticFile, Sequence } from "remotion";
-import { getAudioPath as getAudioPathUtil } from "../../../../utils/pathResolver";
+import { Html5Audio, staticFile, Sequence } from "remotion";
+import { getAudioPath as getAudioPathUtil } from "../../../../utils/pathResolver.js";
 
 /**
  * Component phát âm thanh cho một segment cụ thể
+ * ✅ Updated với Html5Audio
  */
 const SoundPlayer = ({
   startFrame = 30,
@@ -11,6 +12,8 @@ const SoundPlayer = ({
   sound = true,
   soundSource,
   volume = 1,
+  playbackRate = 1,
+  showInTimeline = false,
 }) => {
   // Lấy đường dẫn audio
   const getAudioPath = () => {
@@ -39,7 +42,17 @@ const SoundPlayer = ({
   return (
     <div style={{ display: "none" }}>
       <Sequence from={startFrame} durationInFrames={endFrame - startFrame}>
-        <Audio src={staticFile(audioPath)} volume={volume} />
+        <Html5Audio
+          src={staticFile(audioPath)}
+          volume={volume}
+          playbackRate={playbackRate}
+          showInTimeline={showInTimeline}
+          onError={(err) => {
+            if (process.env.NODE_ENV === "development") {
+              console.warn(`Sound playback error for ${audioPath}:`, err);
+            }
+          }}
+        />
       </Sequence>
     </div>
   );

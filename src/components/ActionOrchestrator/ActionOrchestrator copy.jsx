@@ -12,7 +12,6 @@ import { ACTION_REGISTRY } from "./utils/actionRegistry";
  * - Tìm các actions đang active
  * - Tính toán CSS overrides tích lũy
  * - Render actions thông qua registry
- * ⭐ Hỗ trợ delay actions
  */
 function ActionOrchestrator({ codeFrame = [], textEnd }) {
   const frame = useCurrentFrame();
@@ -30,7 +29,7 @@ function ActionOrchestrator({ codeFrame = [], textEnd }) {
     );
   }, [codeFrame, frame]);
 
-  // ✅ Tìm TẤT CẢ actions đang active (với delay support)
+  // ✅ Tìm TẤT CẢ actions đang active
   const activeActions = React.useMemo(() => {
     const allActiveActions = [];
 
@@ -44,32 +43,25 @@ function ActionOrchestrator({ codeFrame = [], textEnd }) {
       actions.forEach((action, actionIndex) => {
         if (!action || !action.cmd) return;
 
-        // ⭐ Tính toán frame range với DELAY support
+        // Tính toán frame range
         let actionStartFrame = item.startFrame;
         let actionEndFrame = item.endFrame;
 
-        // ⭐ 1. Apply delay trước (nếu có)
-        if (typeof action.delay === "number") {
-          actionStartFrame = item.startFrame + action.delay;
-        }
-
-        // ⭐ 2. Xử lý ToEndFrame và ChangeStartFrame/ChangeEndFrame
         if (action.ToEndFrame === true) {
           actionEndFrame = toEndFrame;
-
           if (typeof action.ChangeStartFrame === "number") {
-            actionStartFrame = actionStartFrame + action.ChangeStartFrame;
+            actionStartFrame = item.startFrame + action.ChangeStartFrame;
           }
         } else {
           if (typeof action.ChangeStartFrame === "number") {
-            actionStartFrame = actionStartFrame + action.ChangeStartFrame;
+            actionStartFrame = item.startFrame + action.ChangeStartFrame;
           }
           if (typeof action.ChangeEndFrame === "number") {
             actionEndFrame = item.endFrame + action.ChangeEndFrame;
           }
         }
 
-        // ⭐ 3. Check active (với frame range đã tính delay)
+        // Check active
         if (frame >= actionStartFrame && frame <= actionEndFrame) {
           allActiveActions.push({
             action,

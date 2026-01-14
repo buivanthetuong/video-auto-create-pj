@@ -30,9 +30,9 @@ const VideoView = ({
 
     if (videoName.includes("_")) {
       const prefix = videoName.split("_")[0];
-      return `assets/${prefix}/${videoName}`;
+      return `video/${prefix}/${videoName}`;
     } else {
-      return `assets/khac/${videoName}`;
+      return `video/${videoName}`;
     }
   };
 

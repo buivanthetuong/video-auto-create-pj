@@ -1,30 +1,82 @@
-// const { execSync } = require("child_process");
-// const { videoData01 } = require("./src/rootComponents/CXK001/data");
-// const fs = require("fs");
-// const path = require("path");
+import { execSync } from "child_process";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+import {
+  root_JSX,
+  folder_render,
+  name_video,
+  VIDEO_METADATA,
+} from "./root-config.js";
 
-const { execSync } = require("child_process");
-const fs = require("fs");
-const path = require("path");
-const { root_JSX, folder_render, name_video } = require("./root-config"); // ✅ Import config
+// ✅ Get __dirname equivalent in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// ✅ Load data từ project được chỉ định trong config
 console.log(`📂 Loading data from project: ${root_JSX}`);
-const { videoData01 } = require(`./src/rootComponents/${root_JSX}/data`);
 
-let videoData = videoData01;
-if (!videoData01[0]?.id) {
-  let temVideoData = [];
-  videoData01.forEach((e, i) => {
-    temVideoData.push({
-      id: i + 1,
-      data: e,
-      nameUseFN: `ID${i + 1}-${name_video}`, //
-      folderUSe: folder_render,
-    });
-  });
-  videoData = temVideoData;
+let videoData;
+
+async function loadDataAndRender() {
+  try {
+    // ✅ Tạo absolute path cho dynamic import
+    const dataPath = path.join(
+      __dirname,
+      "src",
+      "rootComponents",
+      root_JSX,
+      "data.js",
+    );
+
+    // ✅ Convert to file:// URL cho Windows
+    const dataUrl = new URL(`file:///${dataPath.replace(/\\/g, "/")}`).href;
+
+    console.log(`📂 Loading from: ${dataPath}`);
+
+    // Check file exists
+    if (!fs.existsSync(dataPath)) {
+      throw new Error(`❌ Data file not found: ${dataPath}`);
+    }
+
+    // Dynamic import
+    const dataModule = await import(dataUrl);
+    const { videoData01 } = dataModule;
+
+    if (!videoData01) {
+      throw new Error(`❌ videoData01 not found in data.js`);
+    }
+
+    if (!videoData01[0]?.id) {
+      let temVideoData = [];
+      videoData01.forEach((e, i) => {
+        temVideoData.push({
+          id: i + 1,
+          data: e,
+          nameUseFN: `ID${i + 1}-${name_video}`,
+          folderUSe: folder_render,
+        });
+      });
+      videoData = temVideoData;
+    } else {
+      videoData = videoData01;
+    }
+
+    console.log(`✅ Loaded ${videoData.length} video items`);
+
+    // ✅ Tiếp tục với logic render sau khi load data
+    runRenderProcess();
+  } catch (error) {
+    console.error(`❌ Failed to load data:`, error.message);
+    console.error(
+      `📍 Check if file exists: src/rootComponents/${root_JSX}/data.js`,
+    );
+    process.exit(1);
+  }
 }
+
+// ============================================
+// 🎬 RENDER CONFIGURATION
+// ============================================
 
 const VIDEO_CONFIG = {
   width: 1080,
@@ -95,50 +147,45 @@ function createDirectories() {
   }
 }
 
-// function renderVideo(item) {
-//   console.log(item.data[0].hook);
-//   let tittle = item.data[0].hook.split(" ").join("-");
-//   let nameUse =
-//     "ID" + item.id + "REVIEW VỤ ÁN" + tittle + "hagtagReviewHagtagVuan";
+// ============================================
+// 🎨 METADATA GENERATOR
+// ============================================
 
-//   const videoPath = `${renderDir}/${nameUse}.mp4`;
+function generateMetadata(item) {
+  const escapeMetadata = (str) =>
+    str.replace(/["'\\]/g, "\\$&").replace(/\n/g, " ");
 
-//   if (!RENDER_SETTINGS.overwriteExisting && fs.existsSync(videoPath)) {
-//     console.log(`   ⏭️  Video already exists, skipping...`);
-//     const stats = fs.statSync(videoPath);
-//     const fileSizeMB = (stats.size / (1024 * 1024)).toFixed(1);
-//     return { success: true, size: fileSizeMB, type: "video", skipped: true };
-//   }
+  const hook = item.data[0].hook || "";
+  const id = item.id;
+  const hashtags = VIDEO_METADATA.hashtags.join(" ");
 
-//   const quality = getVideoQuality(RENDER_SETTINGS.videoQuality);
-//   const cmd =
-//     `npx remotion render ${item.id} ${videoPath} ` +
-//     `--width=${VIDEO_CONFIG.width} ` +
-//     `--height=${VIDEO_CONFIG.height} ` +
-//     `--fps=${VIDEO_CONFIG.fps} ` +
-//     `--codec=${VIDEO_CONFIG.codec} ` +
-//     `--crf=${quality.crf} ` +
-//     `--pixel-format=${VIDEO_CONFIG.pixelFormat} ` +
-//     `--serve-url=out`;
+  const title = VIDEO_METADATA.titleTemplate
+    .replace("{id}", id)
+    .replace("{hook}", hook);
 
-//   // ✅ CHỈ THÊM maxBuffer ĐỂ TRÁNH LEAK RAM
-//   execSync(cmd, {
-//     stdio: RENDER_SETTINGS.showDetailedProgress ? "inherit" : "pipe",
-//     maxBuffer: 50 * 1024 * 1024, // 50MB buffer
-//   });
+  const description = VIDEO_METADATA.descriptionTemplate
+    .replace("{hook}", hook)
+    .replace("{hashtags}", hashtags)
+    .replace("{id}", id);
 
-//   if (fs.existsSync(videoPath)) {
-//     const stats = fs.statSync(videoPath);
-//     const fileSizeMB = (stats.size / (1024 * 1024)).toFixed(1);
-//     return { success: true, size: fileSizeMB, type: "video", skipped: false };
-//   }
-//   return { success: false, type: "video", skipped: false };
-// }
+  const comment = VIDEO_METADATA.commentTemplate
+    .replace("{hook}", hook)
+    .replace("{id}", id);
+
+  return {
+    title: escapeMetadata(title),
+    description: escapeMetadata(description),
+    comment: escapeMetadata(comment),
+    artist: escapeMetadata(VIDEO_METADATA.artist),
+  };
+}
+
+// ============================================
+// 🎬 RENDER FUNCTIONS
+// ============================================
 
 function renderVideo(item) {
   console.log(item.data[0].hook, "hook");
-
-  // ✅ Tên file ngắn gọn
 
   const nameUse = item.nameUseFN;
   const folder = item.folderUSe;
@@ -168,41 +215,29 @@ function renderVideo(item) {
   });
 
   if (fs.existsSync(videoPath)) {
-    // ✅ THÊM METADATA VÀO VIDEO
-    const tempPath = videoPath.replace(".mp4", "_temp.mp4");
+    if (VIDEO_METADATA.includeMetadata) {
+      const tempPath = videoPath.replace(".mp4", "_temp.mp4");
+      const metadata = generateMetadata(item);
 
-    // Escape ký tự đặc biệt
-    const escapeMetadata = (str) =>
-      str.replace(/["'\\]/g, "\\$&").replace(/\n/g, " ");
+      try {
+        const metadataCmd =
+          `ffmpeg -i "${videoPath}" ` +
+          `-metadata title="${metadata.title}" ` +
+          `-metadata description="${metadata.description}" ` +
+          `-metadata comment="${metadata.comment}" ` +
+          `-metadata artist="${metadata.artist}" ` +
+          `-codec copy "${tempPath}" -y`;
 
-    const hook = escapeMetadata(item.data[0].hook || "");
-    const title = escapeMetadata(`Review Vụ Án - ID${item.id}`);
-    const description = escapeMetadata(
-      `Hook: ${hook} | Hashtags: #ReviewVuAn #TinNongPhapLuat #PhapLuatVietNam`,
-    );
+        execSync(metadataCmd, { stdio: "pipe" });
 
-    try {
-      // Thêm metadata bằng FFmpeg
-      const metadataCmd =
-        `ffmpeg -i "${videoPath}" ` +
-        `-metadata title="${title}" ` +
-        `-metadata description="${description}" ` +
-        `-metadata comment="${hook}" ` +
-        `-metadata artist="Review Vụ Án" ` +
-        `-codec copy "${tempPath}" -y`;
-
-      execSync(metadataCmd, { stdio: "pipe" });
-
-      // Thay thế file gốc
-      fs.unlinkSync(videoPath);
-      fs.renameSync(tempPath, videoPath);
-
-      console.log(`   ✅ Added metadata successfully`);
-    } catch (error) {
-      console.error(`   ⚠️  Failed to add metadata: ${error.message}`);
-      // Cleanup nếu có lỗi
-      if (fs.existsSync(tempPath)) {
-        fs.unlinkSync(tempPath);
+        fs.unlinkSync(videoPath);
+        fs.renameSync(tempPath, videoPath);
+        console.log(`   ✅ Added metadata successfully`);
+      } catch (error) {
+        console.error(`   ⚠️  Failed to add metadata: ${error.message}`);
+        if (fs.existsSync(tempPath)) {
+          fs.unlinkSync(tempPath);
+        }
       }
     }
 
@@ -235,7 +270,6 @@ function renderStill(item) {
     cmd += ` --quality=${STILL_CONFIG.quality}`;
   }
 
-  // ✅ CHỈ THÊM maxBuffer
   execSync(cmd, {
     stdio: RENDER_SETTINGS.showDetailedProgress ? "inherit" : "pipe",
     maxBuffer: 50 * 1024 * 1024,
@@ -246,12 +280,12 @@ function renderStill(item) {
     const fileSizeMB = (stats.size / (1024 * 1024)).toFixed(2);
     return { success: true, size: fileSizeMB, type: "still", skipped: false };
   }
+
   return { success: false, type: "still", skipped: false };
 }
 
 function renderItem(item, index) {
   console.log(`🎬 [${index + 1}/${videoData.length}] Processing: ${item.id}`);
-
   const results = [];
   const itemStartTime = Date.now();
 
@@ -293,74 +327,86 @@ function renderItem(item, index) {
   }
 }
 
-createDirectories();
+// ============================================
+// 🚀 MAIN RENDER PROCESS
+// ============================================
 
-console.log(
-  `🚀 Starting batch render in ${VIDEO_CONFIG.width}x${VIDEO_CONFIG.height} (2K)`,
-);
-console.log(
-  `📊 Video: ${VIDEO_CONFIG.fps}fps, ${VIDEO_CONFIG.codec}, Quality: ${RENDER_SETTINGS.videoQuality}`,
-);
-console.log(`🔧 Mode: ${currentMode.toUpperCase()}`);
-if (currentMode !== RENDER_MODE.VIDEO_ONLY) {
+function runRenderProcess() {
+  createDirectories();
+
   console.log(
-    `🖼️  Still: ${STILL_CONFIG.format.toUpperCase()}, Frame: ${STILL_CONFIG.frame}`,
+    `🚀 Starting batch render in ${VIDEO_CONFIG.width}x${VIDEO_CONFIG.height} (2K)`,
   );
-}
-console.log(
-  `🔄 Overwrite existing: ${RENDER_SETTINGS.overwriteExisting ? "YES" : "NO"}`,
-);
-console.log("");
-
-let successCount = 0;
-let errorCount = 0;
-const startTime = Date.now();
-
-videoData.forEach((item, index) => {
-  const result = renderItem(item, index);
-  if (result.success) {
-    successCount++;
-  } else {
-    errorCount++;
-  }
-});
-
-const totalTime = ((Date.now() - startTime) / 1000 / 60).toFixed(1);
-console.log(`\n🎯 RENDER COMPLETE`);
-console.log(`✅ Success: ${successCount}`);
-console.log(`❌ Errors: ${errorCount}`);
-console.log(`⏱️  Total time: ${totalTime} minutes`);
-
-if (currentMode !== RENDER_MODE.STILL_ONLY && fs.existsSync(renderDir)) {
-  const videoFiles = fs
-    .readdirSync(renderDir)
-    .filter((f) => f.endsWith(".mp4"));
-  let totalVideoSize = 0;
-  videoFiles.forEach((file) => {
-    const stats = fs.statSync(path.join(renderDir, file));
-    totalVideoSize += stats.size;
-  });
-  const totalVideoSizeMB = (totalVideoSize / (1024 * 1024)).toFixed(1);
   console.log(
-    `📹 Videos: ${totalVideoSizeMB}MB (${videoFiles.length} files) - ${renderDir}`,
+    `📊 Video: ${VIDEO_CONFIG.fps}fps, ${VIDEO_CONFIG.codec}, Quality: ${RENDER_SETTINGS.videoQuality}`,
   );
-}
+  console.log(`🔧 Mode: ${currentMode.toUpperCase()}`);
 
-if (currentMode !== RENDER_MODE.VIDEO_ONLY && fs.existsSync(stillDir)) {
-  const stillFiles = fs
-    .readdirSync(stillDir)
-    .filter(
-      (f) => f.endsWith(".png") || f.endsWith(".jpeg") || f.endsWith(".jpg"),
+  if (currentMode !== RENDER_MODE.VIDEO_ONLY) {
+    console.log(
+      `🖼️  Still: ${STILL_CONFIG.format.toUpperCase()}, Frame: ${STILL_CONFIG.frame}`,
     );
-  let totalStillSize = 0;
-  stillFiles.forEach((file) => {
-    const stats = fs.statSync(path.join(stillDir, file));
-    totalStillSize += stats.size;
-  });
-  const totalStillSizeMB = (totalStillSize / (1024 * 1024)).toFixed(1);
+  }
+
   console.log(
-    `🖼️  Stills: ${totalStillSizeMB}MB (${stillFiles.length} files) - ${stillDir}`,
+    `🔄 Overwrite existing: ${RENDER_SETTINGS.overwriteExisting ? "YES" : "NO"}`,
   );
+  console.log("");
+
+  let successCount = 0;
+  let errorCount = 0;
+  const startTime = Date.now();
+
+  videoData.forEach((item, index) => {
+    const result = renderItem(item, index);
+    if (result.success) {
+      successCount++;
+    } else {
+      errorCount++;
+    }
+  });
+
+  const totalTime = ((Date.now() - startTime) / 1000 / 60).toFixed(1);
+
+  console.log(`\n🎯 RENDER COMPLETE`);
+  console.log(`✅ Success: ${successCount}`);
+  console.log(`❌ Errors: ${errorCount}`);
+  console.log(`⏱️  Total time: ${totalTime} minutes`);
+
+  if (currentMode !== RENDER_MODE.STILL_ONLY && fs.existsSync(renderDir)) {
+    const videoFiles = fs
+      .readdirSync(renderDir)
+      .filter((f) => f.endsWith(".mp4"));
+    let totalVideoSize = 0;
+    videoFiles.forEach((file) => {
+      const stats = fs.statSync(path.join(renderDir, file));
+      totalVideoSize += stats.size;
+    });
+    const totalVideoSizeMB = (totalVideoSize / (1024 * 1024)).toFixed(1);
+    console.log(
+      `📹 Videos: ${totalVideoSizeMB}MB (${videoFiles.length} files) - ${renderDir}`,
+    );
+  }
+
+  if (currentMode !== RENDER_MODE.VIDEO_ONLY && fs.existsSync(stillDir)) {
+    const stillFiles = fs
+      .readdirSync(stillDir)
+      .filter(
+        (f) => f.endsWith(".png") || f.endsWith(".jpeg") || f.endsWith(".jpg"),
+      );
+    let totalStillSize = 0;
+    stillFiles.forEach((file) => {
+      const stats = fs.statSync(path.join(stillDir, file));
+      totalStillSize += stats.size;
+    });
+    const totalStillSizeMB = (totalStillSize / (1024 * 1024)).toFixed(1);
+    console.log(
+      `🖼️  Stills: ${totalStillSizeMB}MB (${stillFiles.length} files) - ${stillDir}`,
+    );
+  }
+
+  console.log(`\n🎉 Batch render completed!`);
 }
 
-console.log(`\n🎉 Batch render completed!`);
+// ✅ Start the process
+loadDataAndRender();

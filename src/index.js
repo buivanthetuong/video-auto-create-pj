@@ -1,7 +1,7 @@
 import { registerRoot } from "remotion";
-import { RemotionVideo } from "./RemotionRoot"; // ✅ Import từ file trung gian
+import { RemotionVideo } from "./RemotionRoot.js"; // ✅ Import từ file trung gian
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import "./animations.css";
 /**
  * Central export file cho tất cả utilities và components
  * Sử dụng file này để import dễ dàng hơn:

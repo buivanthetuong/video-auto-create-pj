@@ -1,7 +1,7 @@
 import React from "react";
 import { Html5Audio, Sequence } from "remotion";
 import typingSound from "../../../../assets/soundDefault/TypingSoundCapcut.mp3";
-
+import ImageView from "../media/ImageView";
 /**
  * Component hiển thị text với typing animation
  * ⭐ Nhận data object - access bất kỳ field nào qua data.fieldName
@@ -60,7 +60,7 @@ const TypingText = ({
       )}
 
       {/* ⭐ Ví dụ: Sử dụng imgSource nếu có - KHÔNG CẦN DESTRUCTURE */}
-      {/* {dataAction.imgSource && (
+      {dataAction.imgSource && (
         <div style={{ marginTop: "20px" }}>
           <img
             src={data.imgSource}
@@ -68,7 +68,7 @@ const TypingText = ({
             style={{ maxWidth: "100%", borderRadius: "10px" }}
           />
         </div>
-      )} */}
+      )}
 
       {/* ⭐ Ví dụ: Sử dụng videoSource nếu có */}
       {data.videoSource && (

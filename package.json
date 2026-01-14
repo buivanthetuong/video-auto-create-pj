@@ -6,12 +6,14 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@remotion/cli": "4.0.286",
+    "@remotion/bundler": "^4.0.405",
+    "@remotion/cli": "^4.0.405",
     "@remotion/media-utils": "^4.0.372",
+    "@remotion/renderer": "^4.0.405",
     "bootstrap": "^5.3.8",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "remotion": "^4.0.286",
+    "remotion": "^4.0.405",
     "zod": "3.22.3"
   },
   "devDependencies": {
@@ -27,5 +29,6 @@
     "renderimg": "node render-all6image.js",
     "rendervideoSLOW": "node render-all_video_tiktok.js",
     "lint": "eslint src"
-  }
+  },
+  "type": "module"
 }

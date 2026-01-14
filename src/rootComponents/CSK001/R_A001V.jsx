@@ -8,10 +8,9 @@ import {
   continueRender,
   delayRender,
 } from "remotion";
-import { getBackgroundForId } from "../../ulti/getColorFromID";
-import SoundPlay from "../../smallComponent/soundPlay";
-import TextView from "../../smallComponent/textByID_Coundown";
-import ImageView from "../../smallComponent/imgViewByCodeFrame_KHUNGHINH";
+import { getBackgroundForId } from "../../utils/getColorFromID";
+import SoundPlay from "../../otherComponent/soundPlay";
+import TrungGianXuly from "../../components/ActionOrchestrator/ActionOrchestrator";
 
 const AudioDurationLoader = ({ audioPath, onDurationLoad, index }) => {
   const { fps } = useVideoConfig();
@@ -194,7 +193,7 @@ const FrameCalculator = ({ items, volume = 2, onDataReady }) => {
         tempCodeFrame.push({
           ...e,
           startFrame: accumulatedFrames,
-          endFrame: accumulatedFrames + duration, // TextView dùng duration đầy đủ
+          endFrame: accumulatedFrames + duration, // TrungGianXuly dùng duration đầy đủ
           soundEndFrame: accumulatedFrames + soundDuration, // ✨ THÊM: SoundPlay dùng soundDuration
           duration: duration,
         });
@@ -270,6 +269,7 @@ const FrameCalculator = ({ items, volume = 2, onDataReady }) => {
           })}
         </>
       )}
+
       {!isLoading && (
         <>
           {codeFrame.map((e, i) => (
@@ -304,11 +304,12 @@ export const VideoTemplate = ({ item, duration }) => {
         position: "relative",
         width: "1080px",
         height: "1920px",
-        background: getBackgroundForId(item.id),
+        // background: getBackgroundForId(item.id),
         fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif",
         boxSizing: "border-box",
         lineHeight: 1.4,
         overflow: "hidden",
+        zIndex: 1,
       }}
     >
       <FrameCalculator
@@ -349,11 +350,12 @@ export const VideoTemplate = ({ item, duration }) => {
             }}
           >
             <div className="col-12">
-              {isDataReady && <ImageView codeFrame={imgFrame} />}
               {isDataReady && (
-                <TextView
+                <TrungGianXuly
                   codeFrame={codeFrame}
-                  textEnd={"     Học tiếng anh mỗi ngày!    "}
+                  textEnd={
+                    "     Trắc nghiệm kiến thức về Phòng chữa bệnh cơ xương khớp    "
+                  }
                 />
               )}
             </div>

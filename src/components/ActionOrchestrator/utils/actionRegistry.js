@@ -1,7 +1,9 @@
 // src/Components/ActionOrchestrator/utils/actionRegistry.js
 
-import TypingTextAction from "../actions/TypingTextAction";
-import CountdownAction from "../actions/CountdownAction";
+import TypingTextAction from "../actions/TypingTextAction.jsx";
+import CountdownAction from "../actions/CountdownAction.jsx";
+import ImageViewAction from "../actions/ImageViewAction.jsx";
+import VideoViewAction from "../actions/VideoViewAction.jsx";
 // import FadeInAction from "../actions/FadeInAction";
 // import FadeOutAction from "../actions/FadeOutAction";
 // import ZoomAction from "../actions/ZoomAction";
@@ -19,11 +21,13 @@ import CountdownAction from "../actions/CountdownAction";
 export const ACTION_REGISTRY = {
   typingText: TypingTextAction,
   countdown: CountdownAction,
-//   fadeIn: FadeInAction,
-//   fadeOut: FadeOutAction,
-//   zoom: ZoomAction,
-//   slide: SlideAction,
-//   static: StaticAction,
+  imageView: ImageViewAction,
+  videoView: VideoViewAction,
+  //   fadeIn: FadeInAction,
+  //   fadeOut: FadeOutAction,
+  //   zoom: ZoomAction,
+  //   slide: SlideAction,
+  //   static: StaticAction,
   actionCssClass: null, // Không render, chỉ xử lý CSS
   actionCssId: null, // Không render, chỉ xử lý CSS
 };
