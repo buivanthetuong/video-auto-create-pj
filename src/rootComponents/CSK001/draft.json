@@ -8,7 +8,7 @@
       "text": "+1 Kiến thức về phòng chữa bệnh Cơ xương khớp!",
       "code": "SOUNDCHUNG_SpaceSound",
       "imgHook": "CSK_001.png",
-      "timeFixed": 0.2,
+      "timeFixed": 7,
       "stt": 0,
       "ClassMark": " all",
       "actions": [
@@ -28,8 +28,28 @@
             "padding": "20px",
             "lineHeight": 1.75,
             "letterSpacing": "0.5px",
-            "color": "#ffffff"
+            "color": "#ffffff",
+            "zIndex": 2
           }
+        },
+        {
+          "cmd": "videoView",
+          "video": "LoopingVideo001.mp4",
+          "videoSize": "200%",
+          "loop": true,
+          "sound": false,
+          "ToEndFrame": true,
+          "volume": 0,
+          "id": "IDvideo001",
+          "styleCss": {
+            "height": "1920px",
+            "width": "2000px",
+            "transform": "translate(-20%, -10%)"
+          },
+          "animations": [],
+          "panAnimation": false,
+          "panAmount": 5,
+          "panDuration": 150
         }
       ]
     },
@@ -43,7 +63,43 @@
       "imgHook": "CSK_001.png",
       "stt": 1,
       "ClassMark": " all",
-      "actions": []
+      "timePlus": 3,
+      "actions": [
+        {
+          "cmd": "typingText",
+          "text": "+1 Kiến thức về phòng chữa bệnh Cơ xương khớp!",
+          "sound": true,
+          "noTyping": false,
+          "styleCss": {
+            "position": "absolute",
+            "top": "100px",
+            "fontSize": "70px",
+            "borderTop": "1px solid black",
+            "borderRadius": "20px",
+            "textAlign": "left",
+            "background": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+            "padding": "20px",
+            "lineHeight": 1.75,
+            "letterSpacing": "0.5px",
+            "color": "#ffffff",
+            "zIndex": 2
+          }
+        },
+        {
+          "cmd": "DivAction",
+          "id": "ABC",
+          "styleCss": {
+            "position": "absolute",
+            "top": "100px",
+            "padding": "10px",
+            "height": "100px",
+            "width": "100px",
+            "border": "1px solid black",
+            "backgroundColor": "yellow",
+            "zIndex": 10
+          }
+        }
+      ]
     },
     {
       "tieude": null,
@@ -283,35 +339,8 @@
             "padding": "20px",
             "lineHeight": 1.75,
             "letterSpacing": "0.5px",
-            "color": "#ffffff"
-          }
-        }
-      ]
-    },
-    {
-      "action": "END",
-      "stt": 10,
-      "ClassMark": " all",
-      "code": "SOUNDCHUNG_SpaceSound",
-      "timeFixed": 5,
-      "actions": [
-        {
-          "cmd": "typingText",
-          "text": "HÃY FOLLOW TÔI",
-          "sound": true,
-          "noTyping": false,
-          "styleCss": {
-            "position": "absolute",
-            "top": "100px",
-            "fontSize": "70px",
-            "borderTop": "1px solid black",
-            "borderRadius": "20px",
-            "textAlign": "left",
-            "background": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            "padding": "20px",
-            "lineHeight": 1.75,
-            "letterSpacing": "0.5px",
-            "color": "#ffffff"
+            "color": "#ffffff",
+            "zIndex": 2
           }
         }
       ]

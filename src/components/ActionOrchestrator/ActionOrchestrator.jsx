@@ -56,7 +56,6 @@ function ActionOrchestrator({ codeFrame = [], textEnd }) {
         // ⭐ 2. Xử lý ToEndFrame và ChangeStartFrame/ChangeEndFrame
         if (action.ToEndFrame === true) {
           actionEndFrame = toEndFrame;
-
           if (typeof action.ChangeStartFrame === "number") {
             actionStartFrame = actionStartFrame + action.ChangeStartFrame;
           }
@@ -180,9 +179,10 @@ function ActionOrchestrator({ codeFrame = [], textEnd }) {
       itemIndex,
       actionIndex,
 
-      // Class & ID marks (đặt sau để override nếu cần)
-      className: item.ClassMark || item.className,
-      id: item.IDMark || item.id,
+      // ⭐ Class & ID - Ưu tiên action TRƯỚC, sau đó item
+      className:
+        action.className || action.class || item.ClassMark || item.className,
+      id: action.id || item.IDMark || item.id,
     };
 
     // ✅ Render component với data object

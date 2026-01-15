@@ -6,6 +6,7 @@ import {
   VideoPresets,
   TextPresets,
 } from "../../components/ActionOrchestrator/utils/cssUtils/cssUltis.js";
+import { Sort0toN } from "../../components/ActionOrchestrator/utils/sort0toN.js";
 const BEGIN_END_StyleCSs = {
   position: "absolute",
   top: "100px",
@@ -311,9 +312,14 @@ function OBJ_BEGIN(e) {
 
     VideoPresets.loopingBackground("LoopingVideo001.mp4", {
       id: "IDvideo001", // ⭐ ID cụ thể
-      panAnimation: true,
+      panAnimation: false,
       panAmount: 5,
       panDuration: 150,
+      styleCss: {
+        height: "1920px",
+        width: "2000px",
+        transform: "translate(-20%, -10%)",
+      },
     }),
   ];
 }
@@ -370,7 +376,7 @@ function OBJ_CHONDAPAN(e) {
     {
       cmd: "actionCssId",
       toID: "DUNG",
-      cssMode: "add",
+      cssMode: "replace",
       css: {
         backgroundColor: "yellow",
         background: "yellow",
@@ -379,25 +385,48 @@ function OBJ_CHONDAPAN(e) {
     },
   ];
 }
-function Sort0toN(processedGroup) {
-  return processedGroup
-    .map((item, index) => ({ ...item, __idx: index }))
-    .sort((a, b) => {
-      const sttA = Number(a?.stt ?? 0);
-      const sttB = Number(b?.stt ?? 0);
-      if (sttA !== sttB) return sttA - sttB;
-      return a.__idx - b.__idx; // giữ thứ tự cũ
-    })
-    .map(({ __idx, ...item }) => item);
-}
+
 function OBJ_Hook(e) {
   return [
     {
       cmd: "typingText",
       text: e.text,
+      id: "ABC",
       sound: true,
       noTyping: false,
       styleCss: BEGIN_END_StyleCSs,
+    },
+    {
+      cmd: "DivAction",
+      id: "ABCD",
+      IDMark: "ABCD",
+      ToEndFrame: true,
+      styleCss: {
+        position: "absolute",
+        top: "100px",
+      },
+    },
+    {
+      cmd: "actionCssId",
+      toID: "ABC",
+      cssMode: "add",
+      css: {
+        fontSize: "120px",
+      },
+    },
+    {
+      cmd: "imageView",
+      toID: "ABCD",
+      img: "CSK_001.png",
+      imgSize: "500px",
+
+      styleCss: {
+        position: "relative",
+        borderRadius: "50%",
+        border: "1px solid black",
+        backgroundColor: "yellow",
+        zIndex: 10,
+      },
     },
   ];
 }

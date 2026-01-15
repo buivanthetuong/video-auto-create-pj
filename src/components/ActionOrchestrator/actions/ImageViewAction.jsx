@@ -56,7 +56,7 @@ function ImageViewAction({ data }) {
         styCss={mergedStyle}
         startFrame={actionStartFrame}
         endFrame={actionEndFrame}
-        imgSize={action.imgSize || data.imgSize || "800px"}
+        imgSize={action.imgSize || data.imgSize || "100px"}
         data={data}
         dataAction={action}
       />,

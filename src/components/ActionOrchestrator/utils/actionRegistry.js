@@ -4,6 +4,7 @@ import TypingTextAction from "../actions/TypingTextAction.jsx";
 import CountdownAction from "../actions/CountdownAction.jsx";
 import ImageViewAction from "../actions/ImageViewAction.jsx";
 import VideoViewAction from "../actions/VideoViewAction.jsx";
+import DivAction from "../actions/DivAction.jsx";
 // import FadeInAction from "../actions/FadeInAction";
 // import FadeOutAction from "../actions/FadeOutAction";
 // import ZoomAction from "../actions/ZoomAction";
@@ -23,6 +24,7 @@ export const ACTION_REGISTRY = {
   countdown: CountdownAction,
   imageView: ImageViewAction,
   videoView: VideoViewAction,
+  DivAction: DivAction,
   //   fadeIn: FadeInAction,
   //   fadeOut: FadeOutAction,
   //   zoom: ZoomAction,
