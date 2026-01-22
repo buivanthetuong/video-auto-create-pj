@@ -44,9 +44,7 @@ const DivView = ({
   }
 
   return (
-    <div id={elementId} className={elementClass} style={containerStyle}>
-      AAAAAAAAAAAA
-    </div>
+    <div id={elementId} className={elementClass} style={containerStyle}></div>
   );
 };
 

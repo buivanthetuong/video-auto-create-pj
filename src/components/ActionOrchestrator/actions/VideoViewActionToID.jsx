@@ -1,15 +1,16 @@
-// src/Components/ActionOrchestrator/actions/ImageViewAction.jsx
+// src/Components/ActionOrchestrator/actions/VideoViewActionToID.jsx
 import React from "react";
 import { createPortal } from "react-dom";
-import ImageView from "../smallComponents/media/ImageView.jsx";
+import VideoView from "../smallComponents/media/VideoView.jsx";
 import { mergeStyles } from "../utils/cssOverrideManager.js";
 
 /**
- * 🖼️ IMAGE VIEW ACTION
- * Hiển thị image với styling tùy chỉnh
- * ⭐ Hỗ trợ render img vào element có ID
+ * 🎬 VIDEO VIEW ACTION
+ * Hiển thị video với styling tùy chỉnh
+ * ⭐ Hỗ trợ render video vào element có ID (toID)
+ * ⭐ Width luôn fit container, height auto theo tỷ lệ
  */
-function ImageViewAction({ data }) {
+function VideoViewAction({ data }) {
   const {
     action,
     item,
@@ -22,12 +23,10 @@ function ImageViewAction({ data }) {
     id,
   } = data;
 
-  // ✅ Lấy img từ action hoặc item hoặc data
-  const img = action.img || item.img || data.img;
+  // ✅ Lấy video từ action hoặc item hoặc data
+  const video = action.video || item.video || data.video;
 
-  if (!img) return null;
-
-  console.log(action.toID, "toIDImg");
+  if (!video) return null;
 
   // ✅ Merge styles
   const mergedStyle = mergeStyles(
@@ -48,15 +47,21 @@ function ImageViewAction({ data }) {
       return null;
     }
 
+    console.log("🎬 VideoViewAction rendering to ID:", action.toID);
+
     // ⭐ Dùng React Portal để render vào element có ID
     return createPortal(
-      <ImageView
-        img={img}
+      <VideoView
+        video={video}
         frame={frame}
         styCss={mergedStyle}
         startFrame={actionStartFrame}
         endFrame={actionEndFrame}
-        imgSize={action.imgSize || data.imgSize || "100px"}
+        sound={action.sound !== false}
+        volume={action.volume ?? 1}
+        loop={action.loop ?? true}
+        playbackRate={action.playbackRate ?? 1}
+        objectFit={action.objectFit || "contain"} // ⭐ Default: contain
         data={data}
         dataAction={action}
       />,
@@ -66,18 +71,22 @@ function ImageViewAction({ data }) {
 
   // ⭐ Render bình thường (không có toID)
   return (
-    <ImageView
-      img={img}
+    <VideoView
+      video={video}
       frame={frame}
       styCss={mergedStyle}
       startFrame={actionStartFrame}
       endFrame={actionEndFrame}
-      imgSize={action.imgSize || data.imgSize || "800px"}
+      sound={action.sound !== false}
+      volume={action.volume ?? 1}
+      loop={action.loop ?? true}
+      playbackRate={action.playbackRate ?? 1}
+      objectFit={action.objectFit || "contain"}
       data={data}
       dataAction={action}
     />
   );
 }
 
-export default ImageViewAction;
-export { ImageViewAction };
+export default VideoViewAction;
+export { VideoViewAction };

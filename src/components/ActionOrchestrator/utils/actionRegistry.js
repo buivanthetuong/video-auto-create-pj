@@ -2,9 +2,10 @@
 import TypingTextAction from "../actions/TypingTextAction.jsx";
 import CountdownAction from "../actions/CountdownAction.jsx";
 import ImageViewActionToID from "../actions/ImageViewActionToID.jsx";
-import VideoViewAction from "../actions/VideoViewAction.jsx";
-import DivAction from "../actions/DivAction.jsx";
+import VideoViewAction from "../actions/VideoViewActionToID.jsx";
+import DivAction from "../actions/DivActionToID.jsx";
 import TypingTextActionToID from "../actions/TypingTextActionToID.jsx";
+import SoundPlayerAction from "../actions/SoundPlayerAction.jsx";
 // import FadeInAction from "../actions/FadeInAction";
 // import FadeOutAction from "../actions/FadeOutAction";
 // import ZoomAction from "../actions/ZoomAction";
@@ -26,6 +27,7 @@ export const ACTION_REGISTRY = {
   videoView: VideoViewAction,
   divAction: DivAction,
   typingTextActionToID: TypingTextActionToID,
+  soundPlayerAction: SoundPlayerAction,
   //   fadeIn: FadeInAction,
   //   fadeOut: FadeOutAction,
   //   zoom: ZoomAction,
@@ -59,6 +61,7 @@ export const CMD = {
   typingTextActionToID: "typingTextActionToID",
   actionCssClass: "actionCssClass",
   actionCssId: "actionCssId",
+  soundPlayerAction: "soundPlayerAction",
 };
 
 // Export default để dùng dễ hơn

@@ -1,10 +1,12 @@
+// src/Components/ActionOrchestrator/smallComponents/media/SoundPlayer.jsx
 import React from "react";
 import { Html5Audio, staticFile, Sequence } from "remotion";
 import { getAudioPath as getAudioPathUtil } from "../../../../utils/pathResolver.js";
 
 /**
- * Component phát âm thanh cho một segment cụ thể
- * ✅ Updated với Html5Audio
+ * 🔊 SOUND PLAYER COMPONENT
+ * Phát âm thanh cho một segment cụ thể
+ * ⭐ Hỗ trợ loop on/off
  */
 const SoundPlayer = ({
   startFrame = 30,
@@ -13,6 +15,7 @@ const SoundPlayer = ({
   soundSource,
   volume = 1,
   playbackRate = 1,
+  loop = false, // ⭐ Thêm loop parameter (default: false)
   showInTimeline = false,
 }) => {
   // Lấy đường dẫn audio
@@ -46,6 +49,7 @@ const SoundPlayer = ({
           src={staticFile(audioPath)}
           volume={volume}
           playbackRate={playbackRate}
+          loop={loop} // ⭐ Pass loop prop
           showInTimeline={showInTimeline}
           onError={(err) => {
             if (process.env.NODE_ENV === "development") {

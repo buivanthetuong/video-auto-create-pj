@@ -2,38 +2,28 @@
 import DataFront from "./data_Front_001.json" with { type: "json" };
 import { VideoPresets } from "../../components/ActionOrchestrator/utils/cssUtils/cssUltis.js";
 import { ObjCSS } from "./objCSS.js";
-
+import { CMD } from "../../components/ActionOrchestrator/utils/actionRegistry.js";
 import {
   Sort0toN,
   anim,
   keepOnlyActionsCodeTimeFixedStt,
-} from "../../components/ActionOrchestrator/utils/sort0toN.js";
+} from "../../components/ActionOrchestrator/utils/dataSupportFuntions.js";
+const colorBG = ["yellow", "red", "green", "purple", "blue"];
+const CMD_Fetch = CMD;
 
-const CMD = {
-  typingText: "typingText",
-  countdown: "countdown",
-  imageViewActionToID: "imageViewActionToID",
-  videoView: "videoView",
-  divAction: "divAction",
-  layer001ViewAction: "layer001ViewAction",
-  typingTextActionToID: "typingTextActionToID",
-  actionCssClass: "actionCssClass",
-  actionCssId: "actionCssId",
-};
-const BEGIN_END_StyleCSs = {
-  position: "absolute",
-  top: "100px",
-  fontSize: "70px",
-  borderTop: "1px solid black",
-  borderRadius: "20px",
-  textAlign: "left",
-  background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-  padding: "20px",
-  lineHeight: 1.75,
-  letterSpacing: "0.5px",
-  color: "#ffffff",
-  zIndex: 2,
-};
+// {
+//   typingText: "typingText",
+//   countdown: "countdown",
+//   imageViewActionToID: "imageViewActionToID",
+//   videoView: "videoView",
+//   divAction: "divAction",
+//   layer001ViewAction: "layer001ViewAction",
+//   typingTextActionToID: "typingTextActionToID",
+//   actionCssClass: "actionCssClass",
+//   actionCssId: "actionCssId",
+//   soundPlayerAction: "soundPlayerAction",
+// };
+
 const SpaceSound = "SOUNDCHUNG_SpaceSound";
 
 let videoData01 = [];
@@ -102,7 +92,7 @@ DataFront.forEach((groupArray) => {
         let topPX =
           QSAWPX === 1 ? 50 + QSAWPX * 350 + "px" : 50 + QSAWPX * 250 + "px";
         QSAWPX++;
-        e.actions = OBJ_QSAW(e, topPX, QSAWPX);
+        e.actions = OBJ_QSAW(e, topPX, QSAWPX, i);
         break;
 
       case "CHONDAPAN":
@@ -126,9 +116,61 @@ export { videoData01 };
 function OBJ_BEGIN(e) {
   return [
     {
-      cmd: "layer001ViewAction",
-      ToEndFrame: true,
-      id: "ROOOOO",
+      cmd: CMD_Fetch.divAction,
+      id: "DIV001",
+      styleCss: {
+        position: "absolute",
+        display: "flex",
+        flexDirection: "row",
+        gap: "20px",
+        top: "100px",
+        zIndex: "10",
+        width: "1000px",
+        // backgroundColor: "red",
+        // ⭐ Bắt đầu từ invisible
+      },
+    },
+    {
+      cmd: CMD_Fetch.divAction,
+      id: "DIV001A",
+      toID: "DIV001",
+      delay: 30, // ⭐ Xuất hiện sau 30 frames
+      styleCss: {
+        zIndex: "10",
+        width: "200px",
+        height: "100px",
+        backgroundColor: "yellow",
+        // ⭐ Bắt đầu từ invisible
+        opacity: 0,
+        animation: anim({
+          name: "fadeInSlideUp",
+          frames: 60,
+          ease: "ease-out",
+          delayFrames: 0, // ⭐ Animation bắt đầu ngay khi div xuất hiện
+          fillMode: "forwards",
+        }),
+      },
+    },
+    {
+      cmd: CMD_Fetch.divAction,
+      id: "DIV001B",
+      toID: "DIV001",
+      delay: 60, // ⭐ Xuất hiện sau 60 frames
+      styleCss: {
+        zIndex: "10",
+        width: "200px",
+        height: "300px",
+        backgroundColor: "blue",
+        // ⭐ Bắt đầu từ invisible
+        opacity: 0,
+        animation: anim({
+          name: "fadeInSlideUp",
+          frames: 60,
+          ease: "ease-out",
+          delayFrames: 0,
+          fillMode: "forwards",
+        }),
+      },
     },
     // VideoPresets.loopingBackground("LoopingVideo001.mp4", {
     //   id: "IDvideo001", // ⭐ ID cụ thể
@@ -150,7 +192,7 @@ function OBJ_END(e) {
       text: "HÃY FOLLOW TÔI",
       sound: true,
       noTyping: false,
-      styleCss: BEGIN_END_StyleCSs,
+      styleCss: ObjCSS.BEGIN_END_StyleCSs,
     },
   ];
 }
@@ -179,7 +221,7 @@ function OBJ_DEMNGUOC(e) {
   ];
 }
 
-function OBJ_QSAW(e, topPX, QSAWPX) {
+function OBJ_QSAW(e, topPX, QSAWPX, i) {
   return [
     {
       cmd: "typingTextActionToID",
@@ -189,6 +231,7 @@ function OBJ_QSAW(e, topPX, QSAWPX) {
         ...ObjCSS.CSStypingtextAA001,
         position: "absolute",
         top: topPX,
+        backgroundColor: colorBG[QSAWPX - 1],
       },
     },
   ];
@@ -197,7 +240,7 @@ function OBJ_CHONDAPAN(e) {
   return [
     ,
     {
-      cmd: CMD.divAction,
+      cmd: CMD_Fetch.divAction,
       id: "DUNG",
       styleCss: {
         position: "flex",
@@ -209,7 +252,7 @@ function OBJ_CHONDAPAN(e) {
       },
     },
     {
-      cmd: CMD.divAction,
+      cmd: CMD_Fetch.divAction,
       id: "DUNG1",
       styleCss: {
         position: "flex",

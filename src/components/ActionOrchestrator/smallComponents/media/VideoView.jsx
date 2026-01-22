@@ -11,21 +11,19 @@ import {
 
 /**
  * 🎬 VIDEO VIEW - PURE COMPONENT
- *
- * ⭐ CHỈ RENDER VIDEO - KHÔNG XỬ LÝ ANIMATIONS
- * Animations được handle bởi ActionOrchestrator wrapper
+ * ⭐ Width luôn fit container, height tự động theo tỷ lệ
  */
 const VideoView = ({
   video,
   frame,
-  styCss = {}, // ⭐ Nhận style đã merge với animations từ parent
+  styCss = {},
   startFrame = 0,
   endFrame = 300,
-  videoSize = "1800px",
   sound = true,
   volume = 1,
   loop = true,
   playbackRate = 1,
+  objectFit = "contain", // ⭐ "contain" hoặc "cover"
   ...props
 }) => {
   const currentFrame = useCurrentFrame();
@@ -80,15 +78,24 @@ const VideoView = ({
   if (frame < startFrame || frame > endFrame) return null;
   if (!videoLoaded || !videoPath || !loadedVideoSrc) return null;
 
-  // ⭐ SIMPLE RENDER - Just apply received styles
+  // ⭐ Container style - width 100%, height auto hoặc 100%
+  const containerStyle = {
+    ...styCss,
+    width: "100%", // ⭐ Luôn fit width
+    height: styCss.height || "auto", // ⭐ Height tự động nếu không set
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  };
+
   return (
-    <div style={styCss}>
+    <div style={containerStyle}>
       <Html5Video
         src={loadedVideoSrc}
         style={{
           width: "100%",
           height: "100%",
-          objectFit: "cover",
+          objectFit: objectFit, // ⭐ contain = giữ tỷ lệ, cover = fill container
           display: "block",
         }}
         muted={!sound}
