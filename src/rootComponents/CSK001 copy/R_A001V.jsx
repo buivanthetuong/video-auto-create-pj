@@ -319,8 +319,47 @@ export const VideoTemplate = ({ item, duration }) => {
       />
 
       <Sequence from={0}>
-        <div style={{}}>
-          {isDataReady && <TrungGianXuly codeFrame={codeFrame} />}
+        <div
+          style={{
+            position: "absolute",
+            top: "1780px",
+            bottom: "0px",
+            left: "0px",
+            right: "0px",
+            backgroundColor: "black",
+            padding: "20px",
+            zIndex: "11",
+          }}
+        ></div>
+        <div
+          style={{
+            position: "absolute",
+            top: "100px",
+            bottom: "100px",
+            left: "40px",
+            right: "40px",
+            borderRadius: "30px",
+            padding: "20px",
+          }}
+        >
+          <div
+            className="row"
+            style={{
+              height: "1200px",
+              width: "100%",
+            }}
+          >
+            <div className="col-12">
+              {isDataReady && (
+                <TrungGianXuly
+                  codeFrame={codeFrame}
+                  textEnd={
+                    "     Trắc nghiệm kiến thức về Phòng chữa bệnh cơ xương khớp    "
+                  }
+                />
+              )}
+            </div>
+          </div>
         </div>
       </Sequence>
     </div>

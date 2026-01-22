@@ -1,10 +1,15 @@
 import React from "react";
-import { Html5Audio, Sequence } from "remotion";
+import { Html5Audio, Sequence, useCurrentFrame } from "remotion";
 import typingSound from "../../../../assets/soundDefault/TypingSoundCapcut.mp3";
+import {
+  useAnimations,
+  getAnimationStyle,
+} from "../../utils/animations/animationResolver.js";
 
 /**
  * Component hiển thị text với typing animation
  * ⭐ Nhận data object - access bất kỳ field nào qua data.fieldName
+ * ⭐ HỖ TRỢ REMOTION ANIMATIONS thông qua animations array
  */
 const TypingText = ({
   text = [{ text: "I love you!", type: "normal" }],
@@ -17,8 +22,17 @@ const TypingText = ({
   fps = 30,
   data = {},
   dataAction = {},
-  // ⭐ Nhận toàn bộ data object
 }) => {
+  const currentFrame = useCurrentFrame();
+
+  // ⭐ Lấy id/class từ dataAction hoặc data
+  const elementId = dataAction.id || data.id;
+  const elementClass = dataAction.className || data.className;
+
+  // ⭐ Lấy animations từ data
+  const animations = dataAction.animations || data.animations || [];
+  const animationStyles = useAnimations(animations);
+
   const typingDuration = 3; // 3 giây
   const typingFrames = typingDuration * fps;
 
@@ -38,10 +52,26 @@ const TypingText = ({
     ? combinedText
     : combinedText.slice(0, visibleChars);
 
-  return (
-    <div style={styCss}>
-      {displayText}
+  // ⭐ BUILD SELECTOR
+  const containerSelector = elementId ? `#${elementId}` : null;
 
+  // ⭐ CONTAINER STYLE - styCss + animation
+  const containerStyle = containerSelector
+    ? getAnimationStyle(animationStyles, containerSelector, styCss)
+    : styCss;
+
+  // Debug animations
+  if (currentFrame % 60 === 0 && elementId && animations.length > 0) {
+    console.log(`📝 TypingText [${elementId}] - Frame ${currentFrame}`, {
+      containerSelector,
+      hasAnimation: !!animationStyles[containerSelector],
+      animationCount: animations.length,
+    });
+  }
+
+  return (
+    <div id={elementId} className={elementClass} style={containerStyle}>
+      {displayText}
       {/* ✅ Typing sound with all options */}
       {sound && !noTyping && (
         <Sequence from={startFrame}>
@@ -58,25 +88,6 @@ const TypingText = ({
           />
         </Sequence>
       )}
-
-      {/* ⭐ Ví dụ: Sử dụng imgSource nếu có - KHÔNG CẦN DESTRUCTURE */}
-      {/* {dataAction.imgSource && (
-        <div style={{ marginTop: "20px" }}>
-          <img
-            src={data.imgSource}
-            alt="Content"
-            style={{ maxWidth: "100%", borderRadius: "10px" }}
-          />
-        </div>
-      )} */}
-
-      {/* ⭐ Ví dụ: Sử dụng videoSource nếu có */}
-      {data.videoSource && (
-        <div style={{ marginTop: "20px" }}>Video: {data.videoSource}</div>
-      )}
-
-      {/* ⭐ Ví dụ: Sử dụng bất kỳ field nào */}
-      {data.customField && <div>Custom: {data.customField}</div>}
     </div>
   );
 };

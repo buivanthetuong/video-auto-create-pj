@@ -8,23 +8,23 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import {
-  useAnimations,
-  getAnimationStyle,
-} from "../../utils/animations/animationResolver.js";
 
+/**
+ * 🎬 VIDEO VIEW - PURE COMPONENT
+ *
+ * ⭐ CHỈ RENDER VIDEO - KHÔNG XỬ LÝ ANIMATIONS
+ * Animations được handle bởi ActionOrchestrator wrapper
+ */
 const VideoView = ({
   video,
   frame,
-  styCss = {},
+  styCss = {}, // ⭐ Nhận style đã merge với animations từ parent
   startFrame = 0,
   endFrame = 300,
   videoSize = "1800px",
-  data = {},
-  dataAction = {},
   sound = true,
   volume = 1,
-  loop = false,
+  loop = true,
   playbackRate = 1,
   ...props
 }) => {
@@ -33,14 +33,6 @@ const VideoView = ({
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [loadedVideoSrc, setLoadedVideoSrc] = useState(null);
   const [handle] = useState(() => delayRender("Loading video"));
-
-  // ⭐ Lấy id/class từ dataAction hoặc data
-  const elementId = dataAction.id || data.id;
-  const elementClass = dataAction.className || data.className;
-
-  // ⭐ Lấy animations từ data
-  const animations = dataAction.animations || data.animations || [];
-  const animationStyles = useAnimations(animations);
 
   // Get video path
   const getVideoPath = (videoName) => {
@@ -88,50 +80,22 @@ const VideoView = ({
   if (frame < startFrame || frame > endFrame) return null;
   if (!videoLoaded || !videoPath || !loadedVideoSrc) return null;
 
-  // ⭐ BUILD SELECTORS
-  const containerSelector = elementId ? `#${elementId}` : null;
-  const videoSelector = elementId ? `#${elementId}-video` : null;
-
-  // ⭐ CONTAINER STYLE - styleCss + animation
-  const containerStyle = containerSelector
-    ? getAnimationStyle(animationStyles, containerSelector, styCss)
-    : styCss;
-
-  // ⭐ VIDEO STYLE - default + animation
-  const videoStyle = videoSelector
-    ? getAnimationStyle(animationStyles, videoSelector, {
-        width: "100%",
-        height: "100%",
-        objectFit: "cover",
-        display: "block",
-      })
-    : {
-        width: "100%",
-        height: "100%",
-        objectFit: "cover",
-        display: "block",
-      };
-
-  // Debug
-  if (currentFrame % 60 === 0 && elementId) {
-    console.log(`🎬 VideoView [${elementId}] - Frame ${currentFrame}`, {
-      containerSelector,
-      videoSelector,
-      hasContainerAnimation: !!animationStyles[containerSelector],
-      hasVideoAnimation: !!animationStyles[videoSelector],
-    });
-  }
-
+  // ⭐ SIMPLE RENDER - Just apply received styles
   return (
-    <div id={elementId} className={elementClass} style={containerStyle}>
+    <div style={styCss}>
       <Html5Video
-        id={elementId ? `${elementId}-video` : undefined}
         src={loadedVideoSrc}
-        volume={sound ? volume : 0}
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          display: "block",
+        }}
         muted={!sound}
+        volume={sound ? volume : 0}
         loop={loop}
         playbackRate={playbackRate}
-        style={videoStyle}
+        startFrom={Math.max(0, (frame - startFrame) / fps)}
         onError={(err) => {
           if (process.env.NODE_ENV === "development") {
             console.warn(`Video playback error [${video}]:`, err.message);

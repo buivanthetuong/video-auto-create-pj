@@ -1,12 +1,25 @@
 // ✅ Import JSON trực tiếp
 import DataFront from "./data_Front_001.json" with { type: "json" };
+import { VideoPresets } from "../../components/ActionOrchestrator/utils/cssUtils/cssUltis.js";
+import { ObjCSS } from "./objCSS.js";
+
 import {
-  itemVideoBackground,
-  itemHeroSection,
-  VideoPresets,
-  TextPresets,
-} from "../../components/ActionOrchestrator/utils/cssUtils/cssUltis.js";
-import { Sort0toN } from "../../components/ActionOrchestrator/utils/sort0toN.js";
+  Sort0toN,
+  anim,
+  keepOnlyActionsCodeTimeFixedStt,
+} from "../../components/ActionOrchestrator/utils/sort0toN.js";
+
+const CMD = {
+  typingText: "typingText",
+  countdown: "countdown",
+  imageViewActionToID: "imageViewActionToID",
+  videoView: "videoView",
+  divAction: "divAction",
+  layer001ViewAction: "layer001ViewAction",
+  typingTextActionToID: "typingTextActionToID",
+  actionCssClass: "actionCssClass",
+  actionCssId: "actionCssId",
+};
 const BEGIN_END_StyleCSs = {
   position: "absolute",
   top: "100px",
@@ -22,6 +35,7 @@ const BEGIN_END_StyleCSs = {
   zIndex: 2,
 };
 const SpaceSound = "SOUNDCHUNG_SpaceSound";
+
 let videoData01 = [];
 
 DataFront.forEach((groupArray) => {
@@ -80,7 +94,7 @@ DataFront.forEach((groupArray) => {
         e.actions = OBJ_END(e);
         break;
       case "DEMNGUOC":
-        e.timeFixed = 7;
+        e.timeFixed = 1;
         e.actions = OBJ_DEMNGUOC(e);
         break;
 
@@ -100,233 +114,39 @@ DataFront.forEach((groupArray) => {
     }
   });
 
-  // processedGroup.forEach((e, i) => {
-  //   let temOBJ = { ...e };
-  //   let actionsSETS = [];
-  //   if (e.id) temOBJ.IDMark = e.id;
-  //   if (e.class) temOBJ.ClassMark = e.class;
-
-  //   if (i === 0) {
-  //     processedGroup[0].code = "SOUNDCHUNG_SpaceSound";
-  //     processedGroup[0].timeFixed = 1;
-  //     processedGroup[0].actions = [
-  //       {
-  //         cmd: "typingText",
-  //         text: "CAI NÀY",
-  //         sound: true,
-  //         noTyping: true,
-  //         styleCss: hookFollowStyle,
-  //       },
-  //     ];
-  //   }
-
-  //   if (e.action) {
-  //     if (e.action === "DEMNGUOC") {
-  //       actionsSETS.push({
-  //         cmd: "countdown",
-  //         countDownFrom: 7,
-  //         colorTheme: "orange",
-  //         zIndex: 100,
-  //         styleCss: { scale: "2", transform: "translateY(300px)" },
-  //       });
-  //       temOBJ.code = "SOUNDCHUNG_tiktok-dongho";
-  //       temOBJ.timeFixed = 7;
-  //     }
-
-  //     const hookFollowStyle = {
-  //       marginTop: "100px",
-  //       padding: "40px 60px",
-  //       fontSize: "100px",
-  //       fontWeight: "900",
-  //       color: "#FFD700",
-  //       textAlign: "center",
-  //       background: "rgba(0,0,0,0.75)",
-  //       borderRadius: "20px",
-  //       border: "6px solid #FFD700",
-  //       boxShadow: "0 0 20px #FFD700, 0 0 40px rgba(255,215,0,0.6)",
-  //       textTransform: "uppercase",
-  //       letterSpacing: "2px",
-  //     };
-
-  //     if (e.action === "Hook") {
-  //       actionsSETS.push({
-  //         cmd: "typingText",
-  //         text: e.text,
-  //         sound: true,
-  //         noTyping: false,
-  //         styleCss: hookFollowStyle,
-  //         imgSource: "CSK_001.png",
-  //       });
-
-  //       actionsSETS.push({
-  //         cmd: "imageView",
-  //         delay: 60,
-  //         toID: "hero-container",
-  //         img: "CSK_001.png",
-  //         imgSize: "600px",
-  //         styleCss: {
-  //           borderRadius: "50%",
-  //           // ⭐ Pulse loop animation
-  //           animation: "pulse 2s ease-in-out infinite",
-  //         },
-  //       });
-
-  //       temOBJ.timeFixed = 4;
-  //     }
-
-  //     if (e.action === "FOLLOW") {
-  //       actionsSETS.push({
-  //         cmd: "typingText",
-  //         text: e.text,
-  //         sound: true,
-  //         noTyping: true,
-  //         styleCss: hookFollowStyle,
-  //       });
-  //       temOBJ.timeFixed = 4;
-  //       processedGroup[0].code = "SOUNDCHUNG_SpaceSound";
-  //       processedGroup[0].timeFixed = 1;
-  //       processedGroup[0].actions = [
-  //         {
-  //           cmd: "typingText",
-  //           text: e.text,
-  //           sound: true,
-  //           noTyping: true,
-  //           styleCss: hookFollowStyle,
-  //         },
-  //       ];
-  //     }
-
-  //     if (e.action === "HINHNEN") {
-  //       actionsSETS.push({
-  //         cmd: "typingText",
-  //         text: e.text,
-  //         sound: true,
-  //         noTyping: true,
-  //         styleCss: hookFollowStyle,
-  //       });
-  //       temOBJ.timeFixed = 4;
-  //     }
-
-  //     if (e.action === "CHONDAPAN") {
-  //       actionsSETS.push({
-  //         cmd: "actionCssId",
-  //         toID: "DUNG",
-  //         cssMode: "add",
-  //         css: {
-  //           backgroundColor: "yellow",
-  //           background: "yellow",
-  //           color: "black",
-  //         },
-  //       });
-  //     }
-
-  //     if (e.action === "QSAW") {
-  //       let topPX =
-  //         QSAWPX === 1 ? 50 + QSAWPX * 350 + "px" : 50 + QSAWPX * 250 + "px";
-  //       QSAWPX++;
-
-  //       if (QSAWPX === 4) {
-  //         actionsSETS.push({
-  //           cmd: "actionCssId",
-  //           toID: "OPACITY",
-  //           cssMode: "replace",
-  //           css: {
-  //             transform: "scale(1.5) translateX(-200px)",
-  //             transition: "transform 3s ease-in-out",
-  //           },
-  //         });
-  //       }
-
-  //       actionsSETS.push({
-  //         cmd: "typingText",
-  //         text: e.text,
-  //         sound: true,
-  //         noTyping: true,
-  //         ToEndFrame: true,
-  //         styleCss: {
-  //           position: "absolute",
-  //           top: topPX,
-  //           fontSize: "60px",
-  //           color: "#ffffff",
-  //           borderTop: "1px solid black",
-  //           borderRadius: "20px",
-  //           textAlign: "left",
-  //           background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-  //           padding: "20px",
-  //           lineHeight: 1.35,
-  //           letterSpacing: "0.5px",
-  //         },
-  //       });
-  //     }
-
-  //     if (e.action === "END") {
-  //       actionsSETS.push({
-  //         cmd: "actionCssClass",
-  //         toClass: "AN",
-  //         cssMode: "replace",
-  //         css: { opacity: 0 },
-  //       });
-  //       actionsSETS.push({
-  //         cmd: "typingText",
-  //         text: e.text,
-  //         sound: true,
-  //         styleCss: {
-  //           position: "absolute",
-  //           top: "100px",
-  //           fontSize: "70px",
-  //           borderTop: "1px solid black",
-  //           borderRadius: "20px",
-  //           textAlign: "left",
-  //           background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-  //           padding: "20px",
-  //           lineHeight: 1.75,
-  //           letterSpacing: "0.5px",
-  //           color: "#ffffff",
-  //         },
-  //       });
-  //     }
-  //   }
-
-  //   temOBJ.actions = actionsSETS;
-  //   processedGroup.push(temOBJ);
-  // });
-
   processedGroup = Sort0toN(processedGroup);
 
   videoData01.push(processedGroup);
 });
 
-console.log(JSON.stringify(videoData01));
+console.log(JSON.stringify(keepOnlyActionsCodeTimeFixedStt(videoData01)));
 
 export { videoData01 };
 
 function OBJ_BEGIN(e) {
   return [
     {
-      cmd: "typingText",
-      text: e.text,
-      sound: true,
-      noTyping: true,
-      styleCss: BEGIN_END_StyleCSs,
+      cmd: "layer001ViewAction",
+      ToEndFrame: true,
+      id: "ROOOOO",
     },
-
-    VideoPresets.loopingBackground("LoopingVideo001.mp4", {
-      id: "IDvideo001", // ⭐ ID cụ thể
-      panAnimation: false,
-      panAmount: 5,
-      panDuration: 150,
-      styleCss: {
-        height: "1920px",
-        width: "2000px",
-        transform: "translate(-20%, -10%)",
-      },
-    }),
+    // VideoPresets.loopingBackground("LoopingVideo001.mp4", {
+    //   id: "IDvideo001", // ⭐ ID cụ thể
+    //   panAnimation: false,
+    //   panAmount: 5,
+    //   panDuration: 150,
+    //   styleCss: {
+    //     height: "1920px",
+    //     width: "2000px",
+    //     transform: "translate(-20%, -10%)",
+    //   },
+    // }),
   ];
 }
 function OBJ_END(e) {
   return [
     {
-      cmd: "typingText",
+      cmd: "typingTextActionToID",
       text: "HÃY FOLLOW TÔI",
       sound: true,
       noTyping: false,
@@ -339,10 +159,22 @@ function OBJ_DEMNGUOC(e) {
   return [
     {
       cmd: "countdown",
-      countDownFrom: 7,
+      countDownFrom: 1,
       colorTheme: "orange",
       zIndex: 100,
-      styleCss: { scale: "2", transform: "translateY(300px)" },
+      styleCss: {
+        transform: "translate(-50%, -50%) scale(2)",
+        top: "50%",
+        left: "50%",
+        position: "absolute",
+        animation: anim({
+          name: "slowRotate",
+          frames: 150, // 5s @30fps
+          ease: "linear", // rotate nên linear cho mượt
+          iterationCount: "infinite",
+          fillMode: "both", // hoặc bỏ luôn cũng được
+        }),
+      },
     },
   ];
 }
@@ -350,39 +182,111 @@ function OBJ_DEMNGUOC(e) {
 function OBJ_QSAW(e, topPX, QSAWPX) {
   return [
     {
-      cmd: "typingText",
+      cmd: "typingTextActionToID",
       text: e.text,
-      sound: true,
-      noTyping: true,
-      ToEndFrame: true,
+      group: "1",
       styleCss: {
+        ...ObjCSS.CSStypingtextAA001,
         position: "absolute",
         top: topPX,
-        fontSize: "60px",
-        color: "#ffffff",
-        borderTop: "1px solid black",
-        borderRadius: "20px",
-        textAlign: "left",
-        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-        padding: "20px",
-        lineHeight: 1.35,
-        letterSpacing: "0.5px",
       },
     },
   ];
 }
 function OBJ_CHONDAPAN(e) {
   return [
+    ,
+    {
+      cmd: CMD.divAction,
+      id: "DUNG",
+      styleCss: {
+        position: "flex",
+        top: "100px",
+        zIndex: "10",
+        width: "100%",
+        backgroundColor: "red",
+        transition: "height 5s ease-out",
+      },
+    },
+    {
+      cmd: CMD.divAction,
+      id: "DUNG1",
+      styleCss: {
+        position: "flex",
+        backgroundColor: "yellow",
+        width: "1000px",
+        height: "100px",
+      },
+    },
+    ,
     {
       cmd: "actionCssId",
       toID: "DUNG",
-      cssMode: "replace",
+      cssMode: "add",
       css: {
         backgroundColor: "yellow",
-        background: "yellow",
+        // background: "black",
         color: "black",
       },
     },
+    {
+      cmd: "typingTextActionToID",
+      toID: "DUNG",
+      text: "e.text",
+      styleCss: {
+        ...ObjCSS.CSStypingtextAA001,
+        position: "flex",
+      },
+    },
+    {
+      cmd: "actionCssId",
+      toID: "B25",
+      cssMode: "add",
+      css: {
+        backgroundColor: "yellow",
+        // background: "black",
+        color: "black",
+        height: "300px",
+      },
+    },
+
+    {
+      cmd: CMD.imageViewActionToID,
+      toID: "DUNG",
+      img: "CSK_001.png",
+      styleCss: {
+        width: "100px",
+        position: "relative",
+      },
+    },
+    {
+      cmd: CMD.imageViewActionToID,
+      toID: "DUNG1",
+      img: "CSK_001.png",
+      styleCss: {
+        width: "100px",
+        position: "relative",
+      },
+    },
+    {
+      cmd: CMD.imageViewActionToID,
+      toID: "DUNG",
+      delay: 30,
+      img: "CSK_001.png",
+      positionMode: "before",
+      styleCss: {
+        width: "200px",
+        display: "block",
+        animation: anim({
+          name: "fadeInScale",
+          frames: 50, // 5s @30fps
+          ease: "linear", // rotate nên linear cho mượt
+          iterationCount: 1,
+          fillMode: "both", // hoặc bỏ luôn cũng được
+        }),
+      },
+    },
+    ,
   ];
 }
 
@@ -391,42 +295,7 @@ function OBJ_Hook(e) {
     {
       cmd: "typingText",
       text: e.text,
-      id: "ABC",
-      sound: true,
-      noTyping: false,
-      styleCss: BEGIN_END_StyleCSs,
-    },
-    {
-      cmd: "DivAction",
-      id: "ABCD",
-      IDMark: "ABCD",
-      ToEndFrame: true,
-      styleCss: {
-        position: "absolute",
-        top: "100px",
-      },
-    },
-    {
-      cmd: "actionCssId",
-      toID: "ABC",
-      cssMode: "add",
-      css: {
-        fontSize: "120px",
-      },
-    },
-    {
-      cmd: "imageView",
-      toID: "ABCD",
-      img: "CSK_001.png",
-      imgSize: "500px",
-
-      styleCss: {
-        position: "relative",
-        borderRadius: "50%",
-        border: "1px solid black",
-        backgroundColor: "yellow",
-        zIndex: 10,
-      },
+      styleCss: ObjCSS.CSStypingtextAA001,
     },
   ];
 }

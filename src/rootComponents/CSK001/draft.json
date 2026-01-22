@@ -1,330 +1,235 @@
 [
   [
     {
-      "tieude": "Phòng chữa bệnh Cơ xương khớp!",
-      "action": "BEGIN",
-      "id": null,
-      "class": null,
-      "text": "+1 Kiến thức về phòng chữa bệnh Cơ xương khớp!",
-      "code": "SOUNDCHUNG_SpaceSound",
-      "imgHook": "CSK_001.png",
-      "timeFixed": 7,
-      "stt": 0,
-      "ClassMark": " all",
       "actions": [
-        {
-          "cmd": "typingText",
-          "text": "+1 Kiến thức về phòng chữa bệnh Cơ xương khớp!",
-          "sound": true,
-          "noTyping": true,
-          "styleCss": {
-            "position": "absolute",
-            "top": "100px",
-            "fontSize": "70px",
-            "borderTop": "1px solid black",
-            "borderRadius": "20px",
-            "textAlign": "left",
-            "background": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            "padding": "20px",
-            "lineHeight": 1.75,
-            "letterSpacing": "0.5px",
-            "color": "#ffffff",
-            "zIndex": 2
-          }
-        },
-        {
-          "cmd": "videoView",
-          "video": "LoopingVideo001.mp4",
-          "videoSize": "200%",
-          "loop": true,
-          "sound": false,
-          "ToEndFrame": true,
-          "volume": 0,
-          "id": "IDvideo001",
-          "styleCss": {
-            "height": "1920px",
-            "width": "2000px",
-            "transform": "translate(-20%, -10%)"
-          },
-          "animations": [],
-          "panAnimation": false,
-          "panAmount": 5,
-          "panDuration": 150
-        }
-      ]
+        { "cmd": "layer001ViewAction", "ToEndFrame": true, "id": "ROOOOO" }
+      ],
+      "code": "SOUNDCHUNG_SpaceSound",
+      "timeFixed": 7,
+      "stt": 0
     },
     {
-      "tieude": "Phòng chữa bệnh Cơ xương khớp!",
-      "action": "Hook",
-      "id": null,
-      "class": null,
-      "text": "+1 Kiến thức về phòng chữa bệnh Cơ xương khớp!",
-      "code": "CSKA_000",
-      "imgHook": "CSK_001.png",
-      "stt": 1,
-      "ClassMark": " all",
-      "timePlus": 3,
       "actions": [
         {
           "cmd": "typingText",
           "text": "+1 Kiến thức về phòng chữa bệnh Cơ xương khớp!",
-          "sound": true,
-          "noTyping": false,
           "styleCss": {
-            "position": "absolute",
-            "top": "100px",
-            "fontSize": "70px",
-            "borderTop": "1px solid black",
-            "borderRadius": "20px",
-            "textAlign": "left",
-            "background": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            "padding": "20px",
-            "lineHeight": 1.75,
-            "letterSpacing": "0.5px",
-            "color": "#ffffff",
-            "zIndex": 2
-          }
-        },
-        {
-          "cmd": "DivAction",
-          "id": "ABC",
-          "styleCss": {
-            "position": "absolute",
-            "top": "100px",
-            "padding": "10px",
-            "height": "100px",
-            "width": "100px",
+            "width": "1000px",
+            "minHeight": "100px",
             "border": "1px solid black",
             "backgroundColor": "yellow",
-            "zIndex": 10
+            "fontSize": "100px"
           }
         }
-      ]
+      ],
+      "code": "CSKA_000",
+      "timeFixed": null,
+      "stt": 1
     },
     {
-      "tieude": null,
-      "action": "QSAW",
-      "id": null,
-      "class": "AN",
-      "text": "Tôi bị đau khớp kéo dài hơn 2 tuần không giảm, nhận định nào là đúng nhất?",
-      "code": "CSKA_001",
-      "imgHook": null,
-      "stt": 2,
-      "ClassMark": "AN all",
       "actions": [
         {
-          "cmd": "typingText",
+          "cmd": "typingTextActionToID",
           "text": "Tôi bị đau khớp kéo dài hơn 2 tuần không giảm, nhận định nào là đúng nhất?",
-          "sound": true,
-          "noTyping": true,
-          "ToEndFrame": true,
           "styleCss": {
-            "position": "absolute",
-            "top": "50px",
-            "fontSize": "60px",
-            "color": "#ffffff",
-            "borderTop": "1px solid black",
-            "borderRadius": "20px",
-            "textAlign": "left",
-            "background": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            "padding": "20px",
-            "lineHeight": 1.35,
-            "letterSpacing": "0.5px"
+            "width": "1000px",
+            "minHeight": "100px",
+            "border": "1px solid black",
+            "backgroundColor": "yellow",
+            "fontSize": "100px",
+            "position": "flex"
           }
         }
-      ]
+      ],
+      "code": "CSKA_001",
+      "timeFixed": null,
+      "stt": 2
     },
     {
-      "tieude": null,
-      "action": "QSAW",
-      "id": "OPACITY",
-      "class": "AN",
-      "text": "A. Đau khớp nào cũng tự hết.",
-      "code": "CSKA_002",
-      "imgHook": null,
-      "stt": 3,
-      "IDMark": "OPACITY",
-      "ClassMark": "AN all",
       "actions": [
         {
-          "cmd": "typingText",
+          "cmd": "typingTextActionToID",
           "text": "A. Đau khớp nào cũng tự hết.",
-          "sound": true,
-          "noTyping": true,
-          "ToEndFrame": true,
           "styleCss": {
-            "position": "absolute",
-            "top": "400px",
-            "fontSize": "60px",
-            "color": "#ffffff",
-            "borderTop": "1px solid black",
-            "borderRadius": "20px",
-            "textAlign": "left",
-            "background": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            "padding": "20px",
-            "lineHeight": 1.35,
-            "letterSpacing": "0.5px"
+            "width": "1000px",
+            "minHeight": "100px",
+            "border": "1px solid black",
+            "backgroundColor": "yellow",
+            "fontSize": "100px",
+            "position": "flex"
           }
         }
-      ]
+      ],
+      "code": "CSKA_002",
+      "timeFixed": null,
+      "stt": 3
     },
     {
-      "tieude": null,
-      "action": "QSAW",
-      "id": null,
-      "class": "AN",
-      "text": "B. Chỉ cần uống thuốc giảm đau là đủ.",
-      "code": "CSKA_003",
-      "imgHook": null,
-      "stt": 4,
-      "ClassMark": "AN all",
       "actions": [
         {
-          "cmd": "typingText",
+          "cmd": "typingTextActionToID",
           "text": "B. Chỉ cần uống thuốc giảm đau là đủ.",
-          "sound": true,
-          "noTyping": true,
-          "ToEndFrame": true,
           "styleCss": {
-            "position": "absolute",
-            "top": "550px",
-            "fontSize": "60px",
-            "color": "#ffffff",
-            "borderTop": "1px solid black",
-            "borderRadius": "20px",
-            "textAlign": "left",
-            "background": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            "padding": "20px",
-            "lineHeight": 1.35,
-            "letterSpacing": "0.5px"
+            "width": "1000px",
+            "minHeight": "100px",
+            "border": "1px solid black",
+            "backgroundColor": "yellow",
+            "fontSize": "100px",
+            "position": "flex"
           }
         }
-      ]
+      ],
+      "code": "CSKA_003",
+      "timeFixed": null,
+      "stt": 4
     },
     {
-      "tieude": null,
-      "action": "QSAW",
-      "id": "DUNG",
-      "class": "AN",
-      "text": "C. Đau kéo dài có thể là bệnh, nên đi khám.",
-      "code": "CSKA_004",
-      "imgHook": null,
-      "stt": 5,
-      "IDMark": "DUNG",
-      "ClassMark": "AN all",
       "actions": [
         {
-          "cmd": "typingText",
+          "cmd": "typingTextActionToID",
           "text": "C. Đau kéo dài có thể là bệnh, nên đi khám.",
-          "sound": true,
-          "noTyping": true,
-          "ToEndFrame": true,
           "styleCss": {
-            "position": "absolute",
-            "top": "800px",
-            "fontSize": "60px",
-            "color": "#ffffff",
-            "borderTop": "1px solid black",
-            "borderRadius": "20px",
-            "textAlign": "left",
-            "background": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            "padding": "20px",
-            "lineHeight": 1.35,
-            "letterSpacing": "0.5px"
+            "width": "1000px",
+            "minHeight": "100px",
+            "border": "1px solid black",
+            "backgroundColor": "yellow",
+            "fontSize": "100px",
+            "position": "flex"
           }
         }
-      ]
+      ],
+      "code": "CSKA_004",
+      "timeFixed": null,
+      "stt": 5
     },
     {
-      "tieude": null,
-      "action": "QSAW",
-      "id": null,
-      "class": "AN",
-      "text": "D. Chỉ người già mới bị bệnh khớp.",
-      "code": "CSKA_005",
-      "imgHook": null,
-      "stt": 6,
-      "ClassMark": "AN all",
       "actions": [
         {
-          "cmd": "typingText",
+          "cmd": "typingTextActionToID",
           "text": "D. Chỉ người già mới bị bệnh khớp.",
-          "sound": true,
-          "noTyping": true,
-          "ToEndFrame": true,
           "styleCss": {
-            "position": "absolute",
-            "top": "1050px",
-            "fontSize": "60px",
-            "color": "#ffffff",
-            "borderTop": "1px solid black",
-            "borderRadius": "20px",
-            "textAlign": "left",
-            "background": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            "padding": "20px",
-            "lineHeight": 1.35,
-            "letterSpacing": "0.5px"
+            "width": "1000px",
+            "minHeight": "100px",
+            "border": "1px solid black",
+            "backgroundColor": "yellow",
+            "fontSize": "100px",
+            "position": "flex"
           }
         }
-      ]
+      ],
+      "code": "CSKA_005",
+      "timeFixed": null,
+      "stt": 6
     },
     {
-      "tieude": null,
-      "action": "DEMNGUOC",
-      "id": null,
-      "class": null,
-      "text": null,
-      "code": "SOUNDCHUNG_SpaceSound",
-      "imgHook": null,
-      "stt": 7,
-      "ClassMark": " all",
-      "timeFixed": 7,
       "actions": [
         {
           "cmd": "countdown",
-          "countDownFrom": 7,
+          "countDownFrom": 1,
           "colorTheme": "orange",
           "zIndex": 100,
-          "styleCss": { "scale": "2", "transform": "translateY(300px)" }
+          "styleCss": {
+            "transform": "translate(-50%, -50%) scale(2)",
+            "top": "50%",
+            "left": "50%",
+            "position": "absolute",
+            "animation": "slowRotate 5.000000s linear 0.000000s infinite both"
+          }
         }
-      ]
+      ],
+      "code": "SOUNDCHUNG_SpaceSound",
+      "timeFixed": 1,
+      "stt": 7
     },
     {
-      "tieude": null,
-      "action": "CHONDAPAN",
-      "id": null,
-      "class": null,
-      "text": "Đáp án đúng: C. Đau kéo dài có thể là bệnh, nên đi khám.",
-      "code": "CSKA_006",
-      "imgHook": null,
-      "stt": 8,
-      "ClassMark": " all",
       "actions": [
+        null,
+        {
+          "cmd": "divAction",
+          "id": "DUNG",
+          "styleCss": {
+            "position": "flex",
+            "top": "100px",
+            "zIndex": "10",
+            "width": "100%",
+            "backgroundColor": "red",
+            "transition": "height 5s ease-out"
+          }
+        },
+        {
+          "cmd": "divAction",
+          "id": "DUNG1",
+          "styleCss": {
+            "position": "flex",
+            "backgroundColor": "yellow",
+            "width": "1000px",
+            "height": "100px"
+          }
+        },
+        null,
         {
           "cmd": "actionCssId",
           "toID": "DUNG",
           "cssMode": "add",
+          "css": { "backgroundColor": "yellow", "color": "black" }
+        },
+        {
+          "cmd": "typingTextActionToID",
+          "toID": "DUNG",
+          "text": "e.text",
+          "styleCss": {
+            "width": "1000px",
+            "minHeight": "100px",
+            "border": "1px solid black",
+            "backgroundColor": "yellow",
+            "fontSize": "100px",
+            "position": "flex"
+          }
+        },
+        {
+          "cmd": "actionCssId",
+          "toID": "B25",
+          "cssMode": "add",
           "css": {
             "backgroundColor": "yellow",
-            "background": "yellow",
-            "color": "black"
+            "color": "black",
+            "height": "300px"
           }
-        }
-      ]
+        },
+        {
+          "cmd": "imageViewActionToID",
+          "toID": "DUNG",
+          "img": "CSK_001.png",
+          "styleCss": { "width": "100px", "position": "relative" }
+        },
+        {
+          "cmd": "imageViewActionToID",
+          "toID": "DUNG1",
+          "img": "CSK_001.png",
+          "styleCss": { "width": "100px", "position": "relative" }
+        },
+        {
+          "cmd": "imageViewActionToID",
+          "toID": "DUNG",
+          "delay": 30,
+          "img": "CSK_001.png",
+          "positionMode": "before",
+          "styleCss": {
+            "width": "200px",
+            "display": "block",
+            "animation": "fadeInScale 1.666667s linear 0.000000s 1 both"
+          }
+        },
+        null
+      ],
+      "code": "CSKA_006",
+      "timeFixed": null,
+      "stt": 8
     },
     {
-      "tieude": null,
-      "action": "END",
-      "id": null,
-      "class": null,
-      "text": "Đau khớp kéo dài là dấu hiệu không bình thường. Việc cố chịu hoặc chỉ uống thuốc giảm đau có thể làm chậm phát hiện bệnh, khiến khớp tổn thương nặng hơn.",
-      "code": "CSKA_007",
-      "imgHook": null,
-      "stt": 9,
-      "ClassMark": " all",
       "actions": [
         {
-          "cmd": "typingText",
+          "cmd": "typingTextActionToID",
           "text": "HÃY FOLLOW TÔI",
           "sound": true,
           "noTyping": false,
@@ -343,7 +248,10 @@
             "zIndex": 2
           }
         }
-      ]
+      ],
+      "code": "CSKA_007",
+      "timeFixed": null,
+      "stt": 9
     }
   ]
 ]

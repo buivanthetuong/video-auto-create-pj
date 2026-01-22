@@ -1,381 +1,429 @@
-# Migration Guide - Từ Code Cũ sang Cấu Trúc Mới
+# 🚀 QUICK START GUIDE - NEW ARCHITECTURE
 
-Hướng dẫn chi tiết để chuyển đổi từ code cũ (monolithic) sang cấu trúc module mới.
+## 📦 INSTALLATION
 
-## 📊 So sánh cấu trúc
+Không cần cài đặt thêm gì! Tất cả đã có sẵn trong project.
 
-### ❌ Code cũ (Monolithic)
-```
-src/
-├── R_A001V.jsx (1 file lớn ~500 dòng)
-├── ulti/
-│   └── getColorFromID.js
-└── smallComponent/
-    ├── soundPlay.js
-    ├── backgroundSoundPlay.js
-    ├── videoPlay.js
-    └── showText.js
-```
+## 🎯 5-MINUTE TUTORIAL
 
-### ✅ Code mới (Modular)
-```
-src/
-├── R_A001V.jsx (file chính, gọn gàng ~50 dòng)
-├── index.js (central exports)
-├── utils/ (4 files)
-│   ├── frameCalculator.js
-│   ├── pathResolver.js
-│   ├── imageFrameMerger.js
-│   └── getColorFromID.js
-├── hooks/ (2 files)
-│   ├── useAudioDurations.js
-│   └── useImagePreloader.js
-└── components/
-    ├── core/ (3 files)
-    ├── media/ (4 files)
-    └── text/ (1 file)
+### 1. Import những gì cần thiết
+
+```javascript
+// data.js
+import { stylePresets } from "./components/ActionOrchestrator/presets/styles";
+import { animationPresets } from "./components/ActionOrchestrator/presets/animations";
+import { actionHints } from "./components/ActionOrchestrator/utils/actionHints";
+
+// 💡 TIP: Log ra để xem có gì
+console.log(actionHints.all()); // Xem tất cả actions
+console.log(actionHints.typingText); // Xem hints cho typingText
 ```
 
-## 🔄 Migration Steps
+### 2. Tạo action đầu tiên (Simple)
 
-### Step 1: Backup code cũ
-```bash
-# Backup toàn bộ src folder
-cp -r src src_backup
-```
-
-### Step 2: Tạo cấu trúc thư mục mới
-```bash
-cd src
-mkdir -p utils hooks components/{core,media,text}
-```
-
-### Step 3: Di chuyển và refactor components
-
-#### 3.1. SoundPlay → SoundPlayer
-**Trước:**
-```jsx
-// smallComponent/soundPlay.js
-function SoundPlay({ startFrame, endFrame, sound, soundSource, volume }) {
-  const getAudioPath = () => {
-    // Logic nội bộ
-  };
-  // ...
-}
-```
-
-**Sau:**
-```jsx
-// components/media/SoundPlayer.jsx
-import { getAudioPath } from "../../utils/pathResolver";
-
-function SoundPlayer({ startFrame, endFrame, sound, soundSource, volume }) {
-  const audioPath = getAudioPath({ code: soundSource });
-  // ...
-}
-```
-
-#### 3.2. Component trong R_A001V.jsx → Tách ra
-
-**Trước (trong R_A001V.jsx):**
-```jsx
-const ImageWithAnimation = ({ imgPath, startFrame, ... }) => {
-  // 100+ dòng code
-};
-
-const AudioDurationLoaderV2 = ({ audioPath, ... }) => {
-  // 30+ dòng code
-};
-
-const ImagePreloader = ({ imgPath, ... }) => {
-  // 20+ dòng code
-};
-
-const SequentialSounds = ({ items, ... }) => {
-  // 200+ dòng code
-};
-```
-
-**Sau (tách thành files riêng):**
-```jsx
-// components/media/ImageWithAnimation.jsx
-export default ImageWithAnimation;
-
-// components/core/AudioDurationLoader.jsx
-export default AudioDurationLoader;
-
-// components/core/ImagePreloader.jsx
-export default ImagePreloader;
-
-// components/core/SequentialMediaRenderer.jsx
-export default SequentialMediaRenderer;
-```
-
-### Step 4: Refactor R_A001V.jsx
-
-**Trước (~500 dòng):**
-```jsx
-import React, { useState, useEffect } from "react";
-import { ... } from "remotion";
-
-// Nhiều components lồng nhau
-const ImageWithAnimation = () => { ... };
-const AudioDurationLoaderV2 = () => { ... };
-const ImagePreloader = () => { ... };
-const SequentialSounds = () => { ... };
-
-export const VideoTemplate = ({ item, duration }) => {
-  // Logic phức tạp
-  return (
-    <div>
-      <SequentialSounds items={item.data} ... />
-      {/* More components */}
-    </div>
-  );
-};
-```
-
-**Sau (~50 dòng):**
-```jsx
-import React from "react";
-import { useCurrentFrame, useVideoConfig, Sequence } from "remotion";
-import { getBackgroundForId } from "./utils/getColorFromID";
-import BackgroundSoundPlayer from "./components/media/BackgroundSoundPlayer";
-import VideoPlayer from "./components/media/VideoPlayer";
-import SequentialMediaRenderer from "./components/core/SequentialMediaRenderer";
-
-export const VideoTemplate = ({ item, duration }) => {
-  return (
-    <div style={{ ... }}>
-      <BackgroundSoundPlayer ... />
-      <SequentialMediaRenderer items={item.data} ... />
-      <Sequence from={0}>
-        <VideoPlayer ... />
-      </Sequence>
-    </div>
-  );
-};
-```
-
-### Step 5: Update imports trong toàn bộ project
-
-**Trước:**
-```jsx
-import SoundPlay from "./smallComponent/soundPlay";
-import BackgroundSoundPlay from "./smallComponent/backgroundSoundPlay";
-import VideoPlay from "./smallComponent/videoPlay";
-import TypingText from "./smallComponent/showText";
-```
-
-**Sau (option 1 - import trực tiếp):**
-```jsx
-import SoundPlayer from "./components/media/SoundPlayer";
-import BackgroundSoundPlayer from "./components/media/BackgroundSoundPlayer";
-import VideoPlayer from "./components/media/VideoPlayer";
-import TypingText from "./components/text/TypingText";
-```
-
-**Sau (option 2 - import từ index):**
-```jsx
-import {
-  SoundPlayer,
-  BackgroundSoundPlayer,
-  VideoPlayer,
-  TypingText
-} from "./index";
-```
-
-### Step 6: Testing
-
-#### Test 1: Render basic video
-```jsx
-import { VideoTemplate } from "./R_A001V";
-
-const testData = {
-  id: 1,
-  data: [
+```javascript
+const myFirstAction = {
+  startFrame: 0,
+  endFrame: 90,
+  code: "SOUNDCHUNG_SpaceSound",
+  timeFixed: 3,
+  actions: [
     {
-      code: "TEST_001",
-      img: "test.jpg",
-      timePlus: 2,
+      cmd: "typingText",
+      content: {
+        text: "Hello World!",
+        sound: true,
+      },
+      // ⭐ Không cần thêm gì - dùng defaults
+    },
+  ],
+};
+```
+
+### 3. Thêm style preset
+
+```javascript
+{
+  cmd: "typingText",
+  content: {
+    text: "BIG YELLOW TEXT!",
+    sound: true
+  },
+  styleCss: {
+    base: "typingText.bigYellow" // ⭐ Dùng preset có sẵn
+  }
+}
+```
+
+### 4. Override một chút
+
+```javascript
+{
+  cmd: "typingText",
+  content: {
+    text: "Custom text",
+    sound: true
+  },
+  styleCss: {
+    base: "typingText.bigYellow",
+    override: {
+      fontSize: "120px", // ⭐ Chỉ override cái cần
+      color: "#00FF00"
+    }
+  }
+}
+```
+
+### 5. Thêm animation
+
+```javascript
+{
+  cmd: "typingText",
+  content: {
+    text: "Animated text!",
+    sound: true
+  },
+  styleCss: {
+    base: "typingText.heroTitle"
+  },
+  animation: {
+    type: "typingText.fadeIn", // ⭐ Preset animation
+    params: {
+      duration: 40 // ⭐ Override duration
+    }
+  }
+}
+```
+
+## 🎨 COMMON USE CASES
+
+### Case 1: Hero Section
+
+```javascript
+{
+  startFrame: 0,
+  endFrame: 150,
+  actions: [
+    // Background video
+    {
+      cmd: "videoView",
+      id: "bgVideo",
+      content: {
+        video: "LoopingVideo001.mp4",
+        loop: true,
+        sound: false
+      },
+      styleCss: {
+        base: "videoView.fullscreen"
+      },
+      animation: {
+        type: "videoView.kenBurns",
+        params: { duration: 150 }
+      },
+      ToEndFrame: true
+    },
+
+    // Hero title
+    {
+      cmd: "typingText",
+      content: {
+        text: "WELCOME",
+        sound: true
+      },
+      styleCss: {
+        base: "typingText.heroTitle"
+      },
+      animation: {
+        type: "typingText.fadeInZoom"
+      },
+      delay: 30
     }
   ]
-};
-
-<VideoTemplate item={testData} duration={300} />
+}
 ```
 
-#### Test 2: Kiểm tra console logs
-```
-✓ Audio duration loaded: audio/TEST/TEST_001.mp3 = 180 frames
-✓ Image loaded: assets/test/test.jpg
-✅ All resources loaded!
-📸 Merged image frames:
-  0: assets/test/test.jpg | Frames 0-180 (180f = 6.0s) | 1 audio segments
-```
+### Case 2: Image Showcase
 
-#### Test 3: Kiểm tra animations
-```jsx
-// Test từng loại animation
-const animations = [
-  "kenBurns", "zoomIn", "zoomOut", 
-  "slideIn", "parallax", "rotate", 
-  "slideUp", "fade", "all"
-];
-
-animations.forEach(anim => {
-  render(<SequentialMediaRenderer animationType={anim} />);
-});
+```javascript
+{
+  cmd: "imageView",
+  id: "mainImage",
+  content: {
+    img: "photo.jpg",
+    imgSize: "800px"
+  },
+  styleCss: {
+    base: "imageView.hero"
+  },
+  animation: {
+    type: "imageView.pulse",
+    params: { duration: 120 }
+  }
+}
 ```
 
-## 🎯 Breaking Changes
+### Case 3: Countdown
 
-### 1. Component names đã đổi
-
-| Tên cũ | Tên mới |
-|--------|---------|
-| `SoundPlay` | `SoundPlayer` |
-| `BackgroundSoundPlay` | `BackgroundSoundPlayer` |
-| `VideoPlay` | `VideoPlayer` |
-| `TypingText` | `TypingText` (không đổi) |
-| `SequentialSounds` | `SequentialMediaRenderer` |
-
-### 2. Props đã đổi
-
-**SequentialSounds → SequentialMediaRenderer:**
-- ✅ Giữ nguyên: `items`, `volume`, `scaleImg`, `cssDiv`, `cssImg`, `animationType`
-- ❌ Không còn: Internal state management (được chuyển vào hooks)
-
-### 3. Internal functions → Utilities
-
-Functions đã được extract ra:
-
-```jsx
-// ❌ Trước: Functions nội bộ trong component
-const getAudioPath = (e) => { ... }
-const getImagePath = (e) => { ... }
-
-// ✅ Sau: Import từ utilities
-import { getAudioPath, getImagePath } from "./utils/pathResolver";
+```javascript
+{
+  cmd: "countdown",
+  content: {
+    countDownFrom: 7,
+    colorTheme: "orange"
+  },
+  styleCss: {
+    override: {
+      scale: "2",
+      transform: "translateY(300px)"
+    }
+  }
+}
 ```
 
-### 4. State management → Custom Hooks
+### Case 4: NEW - Shape Actions
 
-```jsx
-// ❌ Trước: useState trực tiếp
-const [durations, setDurations] = useState({});
-const [loadingCount, setLoadingCount] = useState(0);
+```javascript
+// Image trong Star shape
+{
+  cmd: "imageShape",
+  id: "starImage",
+  content: {
+    img: "photo.jpg",
+    shape: "star"
+  },
+  styleCss: {
+    base: "imageShape.star",
+    override: {
+      container: {
+        width: "600px",
+        height: "600px"
+      }
+    }
+  },
+  animation: {
+    type: "imageView.rotation",
+    params: { duration: 180 }
+  }
+}
 
-// ✅ Sau: Sử dụng custom hook
-const { durations, loadingCount, handleDurationLoad } = useAudioDurations(totalCount);
+// Text trong Hexagon shape
+{
+  cmd: "textShape",
+  content: {
+    text: "NEW",
+    shape: "hexagon"
+  },
+  styleCss: {
+    base: "textShape.hexagon"
+  }
+}
 ```
 
-## 📝 Checklist Migration
+## 🔍 HOW TO DISCOVER PRESETS
 
-- [ ] Backup code cũ
-- [ ] Tạo cấu trúc thư mục mới
-- [ ] Copy và refactor utilities
-- [ ] Tạo custom hooks
-- [ ] Tách components ra files riêng
-- [ ] Refactor R_A001V.jsx
-- [ ] Update tất cả imports
-- [ ] Test rendering
-- [ ] Test animations
-- [ ] Test audio/video playback
-- [ ] Kiểm tra console logs
-- [ ] Verify performance (không chậm hơn)
-- [ ] Update documentation
+### Method 1: Use actionHints
 
-## 🚀 Advantages của cấu trúc mới
+```javascript
+import { actionHints } from "./utils/actionHints";
 
-### 1. **Dễ maintain**
-- Mỗi file có trách nhiệm rõ ràng
-- Dễ tìm và sửa bugs
-- Code ngắn gọn hơn (~50-100 dòng/file)
+// Xem tất cả
+console.log(actionHints.all());
+// Output: ["typingText", "imageView", "videoView", ...]
 
-### 2. **Dễ test**
-- Test từng utility function riêng
-- Test từng component độc lập
-- Mock dependencies dễ dàng
+// Xem chi tiết cho typingText
+console.log(actionHints.typingText);
+// Output: {
+//   cmd: "typingText",
+//   content: { required: [...], optional: [...] },
+//   styles: { available: ["default", "bigYellow", ...] },
+//   animations: { available: ["fadeIn", "slideIn", ...] },
+//   example: { ... }
+// }
 
-### 3. **Dễ mở rộng**
-- Thêm animation mới: chỉ sửa ImageWithAnimation.jsx
-- Thêm media type mới: tạo component mới trong media/
-- Thêm utility mới: tạo file mới trong utils/
-
-### 4. **Reusable**
-- Components có thể dùng ở nhiều nơi
-- Utilities có thể dùng cho nhiều projects
-- Hooks có thể share giữa các components
-
-### 5. **Better performance**
-- Code splitting tốt hơn
-- Tree shaking hiệu quả hơn
-- Import chỉ những gì cần dùng
-
-## 🔧 Common Issues & Solutions
-
-### Issue 1: Import errors
-**Problem:** `Cannot find module './utils/pathResolver'`
-
-**Solution:**
-```bash
-# Kiểm tra file có tồn tại
-ls -la src/utils/pathResolver.js
-
-# Kiểm tra đường dẫn tương đối
-# Nếu import từ components/core/, dùng: "../../utils/pathResolver"
+// Search
+console.log(actionHints.search("shape"));
+// Output: { imageShape: {...}, textShape: {...} }
 ```
 
-### Issue 2: Component không render
-**Problem:** Component render nhưng không hiển thị gì
+### Method 2: Browse preset files
 
-**Solution:**
-```jsx
-// Kiểm tra console logs
-console.log("Frame ranges:", frameRanges);
-console.log("Current frame:", currentFrame);
-
-// Verify paths
-console.log("Audio path:", getAudioPath(item));
-console.log("Image path:", getImagePath(item));
+```
+presets/
+├─ styles/
+│  ├─ typingText.js    ← Xem available styles
+│  ├─ imageView.js
+│  └─ ...
+└─ animations/
+   ├─ typingText.js    ← Xem available animations
+   └─ ...
 ```
 
-### Issue 3: Animation không hoạt động
-**Problem:** Images không có animation
+### Method 3: Check examples
 
-**Solution:**
-```jsx
-// Kiểm tra animationType prop
-<SequentialMediaRenderer animationType="kenBurns" /> // ✅ Correct
-<SequentialMediaRenderer animationType="invalid" />  // ❌ Wrong
+File `data_NEW_ARCHITECTURE_EXAMPLE.js` có đầy đủ examples.
 
-// Verify trong ImageWithAnimation
-console.log("Animation type:", animationType);
-console.log("Progress:", progress);
+## 💡 TIPS & TRICKS
+
+### Tip 1: Start Simple
+
+```javascript
+// ✅ Good - Bắt đầu đơn giản
+{
+  cmd: "typingText",
+  content: { text: "Hello" }
+}
+
+// ❌ Avoid - Đừng phức tạp hóa ngay từ đầu
+{
+  cmd: "typingText",
+  content: { ... },
+  styleCss: { ... },
+  animation: { ... },
+  parentID: "...",
+  childID: "..."
+}
 ```
 
-## 📚 Additional Resources
+### Tip 2: Use Presets First
 
-- [README.md](./README.md) - Hướng dẫn sử dụng chi tiết
-- [ExampleUsage.jsx](./ExampleUsage.jsx) - Các ví dụ sử dụng
-- [Remotion Docs](https://www.remotion.dev/docs) - Tài liệu Remotion
+```javascript
+// ✅ Good - Dùng preset
+{
+  styleCss: {
+    base: "typingText.bigYellow"
+  }
+}
 
-## 💡 Tips
+// ⚠️ OK but not recommended - Hard-code
+{
+  styleCss: {
+    fontSize: "100px",
+    fontWeight: "900",
+    color: "#FFD700",
+    // ... 20 dòng style khác
+  }
+}
+```
 
-1. **Migrate từng bước nhỏ**: Đừng migrate tất cả cùng lúc
-2. **Test sau mỗi bước**: Đảm bảo mọi thứ hoạt động trước khi tiếp tục
-3. **Giữ code cũ**: Backup để tham khảo khi cần
-4. **Sử dụng TypeScript**: Nếu muốn, thêm `.d.ts` files cho type safety
-5. **Document changes**: Ghi chú lại những thay đổi đã làm
+### Tip 3: Override Minimally
 
-## 🎉 Kết luận
+```javascript
+// ✅ Good - Chỉ override cái cần
+{
+  styleCss: {
+    base: "typingText.bigYellow",
+    override: {
+      fontSize: "120px" // Chỉ 1 field
+    }
+  }
+}
 
-Sau khi migrate, bạn sẽ có:
-- ✅ Code gọn gàng, dễ đọc hơn
-- ✅ Cấu trúc rõ ràng, dễ maintain
-- ✅ Components reusable
-- ✅ Performance tốt hơn
-- ✅ Dễ mở rộng trong tương lai
+// ❌ Avoid - Override quá nhiều
+{
+  styleCss: {
+    base: "typingText.bigYellow",
+    override: {
+      fontSize: "120px",
+      color: "red",
+      background: "blue",
+      padding: "50px",
+      // ... quá nhiều overrides
+    }
+  }
+}
+```
 
-Chúc bạn migrate thành công! 🚀
+### Tip 4: Add ID for Animations
+
+```javascript
+// ✅ Good - Có ID
+{
+  cmd: "imageView",
+  id: "mainImage", // ⭐ Cần ID để animations target
+  animation: {
+    type: "imageView.pulse"
+  }
+}
+
+// ⚠️ Warning - Không ID, animation không hoạt động
+{
+  cmd: "imageView",
+  animation: {
+    type: "imageView.pulse"
+  }
+}
+```
+
+## 🎯 CHEAT SHEET
+
+### Typography Actions
+
+- `typingText` - Text với typing effect
+- `textShape` - Text trong shape đặc biệt
+
+### Media Actions
+
+- `imageView` - Hiển thị image
+- `videoView` - Hiển thị video
+- `imageShape` - Image trong shape đặc biệt
+
+### Other Actions
+
+- `countdown` - Đếm ngược
+- `DivAction` - Div container
+- `actionCssId` - Thay đổi CSS theo ID
+- `actionCssClass` - Thay đổi CSS theo class
+
+### Common Style Presets
+
+- `typingText.default`
+- `typingText.bigYellow`
+- `typingText.heroTitle`
+- `imageView.hero`
+- `imageView.avatar`
+- `videoView.fullscreen`
+- `videoView.loopingBackground`
+
+### Common Animation Presets
+
+- `typingText.fadeIn`
+- `typingText.slideInLeft`
+- `typingText.zoomIn`
+- `imageView.pulse`
+- `imageView.kenBurns`
+- `videoView.pan`
+- `videoView.zoom`
+
+## 📚 NEXT STEPS
+
+1. ✅ Read MIGRATION_GUIDE.md nếu có code cũ
+2. ✅ Check data_NEW_ARCHITECTURE_EXAMPLE.js cho examples
+3. ✅ Explore actionHints để discover presets
+4. ✅ Create your first action với new architecture
+5. ✅ Tạo custom presets nếu cần
+
+## 🆘 TROUBLESHOOTING
+
+### Animation không hoạt động?
+
+- Check có ID chưa: `id: "myElement"`
+- Check animation config đúng format chưa
+- Log actionHints để xem available animations
+
+### Style không apply?
+
+- Check base preset có tồn tại không
+- Check override syntax đúng chưa
+- Log stylePresets để xem available styles
+
+### Action không render?
+
+- Check cmd có đúng không
+- Check có trong ACTION_REGISTRY chưa
+- Check visibility (startFrame, endFrame)
+
+## 🎉 YOU'RE READY!
+
+Bây giờ bạn đã sẵn sàng để tạo videos với kiến trúc mới!
+
+Happy coding! 🚀

@@ -13,6 +13,7 @@ import { ACTION_REGISTRY } from "./utils/actionRegistry";
  * - Tính toán CSS overrides tích lũy
  * - Render actions thông qua registry
  * ⭐ Hỗ trợ delay actions
+ * ⭐ Hỗ trợ parent-child hierarchy với 3 style levels
  */
 function ActionOrchestrator({ codeFrame = [], textEnd }) {
   const frame = useCurrentFrame();
@@ -21,6 +22,36 @@ function ActionOrchestrator({ codeFrame = [], textEnd }) {
   const toEndFrame = React.useMemo(() => {
     if (codeFrame.length === 0) return 0;
     return Math.max(...codeFrame.map((item) => item.endFrame));
+  }, [codeFrame]);
+  // ⭐ Tính toán group endFrames (endFrame lớn nhất của mỗi group)
+  const groupEndFrames = React.useMemo(() => {
+    const groupMap = new Map();
+
+    codeFrame.forEach((item) => {
+      const actions = Array.isArray(item.actions)
+        ? item.actions
+        : item.action
+          ? [item.action]
+          : [];
+
+      actions.forEach((action) => {
+        if (!action || !action.cmd) return;
+
+        // Chỉ xét các action có group (không phải undefined, null)
+        const group = action.group;
+        if (group === undefined || group === null) return;
+
+        // Lấy endFrame hiện tại của group (nếu đã có)
+        const currentGroupEndFrame = groupMap.get(group) || 0;
+
+        // So sánh và lưu endFrame lớn nhất
+        if (item.endFrame > currentGroupEndFrame) {
+          groupMap.set(group, item.endFrame);
+        }
+      });
+    });
+
+    return groupMap;
   }, [codeFrame]);
 
   // ✅ Tìm currentItem (fallback logic)
@@ -58,6 +89,20 @@ function ActionOrchestrator({ codeFrame = [], textEnd }) {
           actionEndFrame = toEndFrame;
           if (typeof action.ChangeStartFrame === "number") {
             actionStartFrame = actionStartFrame + action.ChangeStartFrame;
+          }
+        } else if (action.group !== undefined && action.group !== null) {
+          // ✅ Ưu tiên 2: Group
+          const groupEndFrame = groupEndFrames.get(action.group);
+          if (groupEndFrame !== undefined) {
+            actionEndFrame = groupEndFrame;
+          }
+
+          // Vẫn cho phép ChangeStartFrame và ChangeEndFrame
+          if (typeof action.ChangeStartFrame === "number") {
+            actionStartFrame = actionStartFrame + action.ChangeStartFrame;
+          }
+          if (typeof action.ChangeEndFrame === "number") {
+            actionEndFrame = actionEndFrame + action.ChangeEndFrame;
           }
         } else {
           if (typeof action.ChangeStartFrame === "number") {
@@ -135,8 +180,8 @@ function ActionOrchestrator({ codeFrame = [], textEnd }) {
       "0 4px 30px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(102, 126, 234, 0.8), 0 0 60px rgba(240, 147, 251, 0.4)",
   };
 
-  // ✅ Function render action thông qua registry
-  const renderAction = (activeActionData) => {
+  // ✅ Function render action component
+  const renderActionComponent = (activeActionData) => {
     const {
       action,
       item,
@@ -148,7 +193,6 @@ function ActionOrchestrator({ codeFrame = [], textEnd }) {
 
     // Lấy ActionComponent từ registry
     const ActionComponent = ACTION_REGISTRY[action.cmd];
-
     if (!ActionComponent) {
       console.warn(
         `[ActionOrchestrator] ⚠️ Unknown action cmd: "${action.cmd}"`,
@@ -160,38 +204,68 @@ function ActionOrchestrator({ codeFrame = [], textEnd }) {
     const actionData = {
       // ⭐ SPREAD TOÀN BỘ properties của item trước
       ...item,
-
       // Core data (có thể override item properties nếu trùng tên)
       action,
       item, // Giữ lại reference đầy đủ
       frame,
-
       // Frame timing
       actionStartFrame,
       actionEndFrame,
       toEndFrame,
-
       // Styling
       cssOverrides,
       defaultTextStyle,
-
       // Identifiers
       itemIndex,
       actionIndex,
-
       // ⭐ Class & ID - Ưu tiên action TRƯỚC, sau đó item
       className:
         action.className || action.class || item.ClassMark || item.className,
       id: action.id || item.IDMark || item.id,
     };
 
-    // ✅ Render component với data object
-    return (
-      <ActionComponent
-        key={`${action.cmd}-${itemIndex}-${actionIndex}`}
-        data={actionData}
-      />
-    );
+    return <ActionComponent data={actionData} />;
+  };
+
+  // ⭐ Function render action với parent-child wrapping
+  const renderActionWithWrapper = (activeActionData, index) => {
+    const { action } = activeActionData;
+
+    // Lấy parentID và childID từ action
+    const parentID = action.parentID || action.parentId;
+    const childID = action.childID || action.childId;
+
+    const parentClass = action.parentClass || "";
+    const childClass = action.childClass || "";
+
+    // Generate unique key
+    const key = `${action.cmd}-${activeActionData.itemIndex}-${activeActionData.actionIndex}`;
+
+    // ✅ Render component
+    const component = renderActionComponent(activeActionData);
+
+    // ⭐ CHỈ xét trường hợp có CẢ parentID và childID
+    if (parentID && childID) {
+      // Lấy 3 style riêng biệt
+      const parentStyle = action.styleCssParent || {};
+      const childStyle = action.styleCssChild || {};
+      // styleCss sẽ được component tự xử lý thông qua action data
+
+      return (
+        <div
+          key={key}
+          id={parentID}
+          className={parentClass}
+          style={parentStyle}
+        >
+          <div id={childID} className={childClass} style={childStyle}></div>
+          {component}
+        </div>
+      );
+    }
+
+    // ⭐ Không có cả 2 - render trực tiếp
+    return <React.Fragment key={key}>{component}</React.Fragment>;
   };
 
   // ✅ Render content
@@ -199,8 +273,8 @@ function ActionOrchestrator({ codeFrame = [], textEnd }) {
     if (activeActions.length > 0) {
       return (
         <>
-          {activeActions.map((activeActionData) =>
-            renderAction(activeActionData),
+          {activeActions.map((activeActionData, index) =>
+            renderActionWithWrapper(activeActionData, index),
           )}
         </>
       );

@@ -1,10 +1,10 @@
 // src/Components/ActionOrchestrator/utils/actionRegistry.js
-
 import TypingTextAction from "../actions/TypingTextAction.jsx";
 import CountdownAction from "../actions/CountdownAction.jsx";
-import ImageViewAction from "../actions/ImageViewAction.jsx";
+import ImageViewActionToID from "../actions/ImageViewActionToID.jsx";
 import VideoViewAction from "../actions/VideoViewAction.jsx";
 import DivAction from "../actions/DivAction.jsx";
+import TypingTextActionToID from "../actions/TypingTextActionToID.jsx";
 // import FadeInAction from "../actions/FadeInAction";
 // import FadeOutAction from "../actions/FadeOutAction";
 // import ZoomAction from "../actions/ZoomAction";
@@ -22,9 +22,10 @@ import DivAction from "../actions/DivAction.jsx";
 export const ACTION_REGISTRY = {
   typingText: TypingTextAction,
   countdown: CountdownAction,
-  imageView: ImageViewAction,
+  imageViewActionToID: ImageViewActionToID,
   videoView: VideoViewAction,
-  DivAction: DivAction,
+  divAction: DivAction,
+  typingTextActionToID: TypingTextActionToID,
   //   fadeIn: FadeInAction,
   //   fadeOut: FadeOutAction,
   //   zoom: ZoomAction,
@@ -33,3 +34,32 @@ export const ACTION_REGISTRY = {
   actionCssClass: null, // Không render, chỉ xử lý CSS
   actionCssId: null, // Không render, chỉ xử lý CSS
 };
+
+/**
+ * 🔑 COMMAND STRINGS
+ * Object chứa các string cmd để dùng nhanh, tránh typo
+ *
+ * Usage:
+ * { cmd: CMD.typingText, ... }
+ * hoặc: { cmd: CMD.layer001ViewAction, ... }
+ */
+/**
+ * 🔑 COMMAND STRINGS
+ * @readonly
+ * @enum {string}
+ */
+
+export const CMD = {
+  typingText: "typingText",
+  countdown: "countdown",
+  imageViewActionToID: "imageViewActionToID",
+  videoView: "videoView",
+  divAction: "divAction",
+  layer001ViewAction: "layer001ViewAction",
+  typingTextActionToID: "typingTextActionToID",
+  actionCssClass: "actionCssClass",
+  actionCssId: "actionCssId",
+};
+
+// Export default để dùng dễ hơn
+export default ACTION_REGISTRY;
