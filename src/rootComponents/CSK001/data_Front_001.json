@@ -1,36 +1,134 @@
 [
-  {
-    "code": "SOUNDCHUNG_SpaceSound",
-    "script": "script1",
-    "group": "group_2",
-    "mode": 1,
-    "text": "Đây là đầu gối",
-    "textSize": "60px",
-    "textStyle": 1,
-    "img": "CSK_daugoi.png",
-    "imgEffect": null,
-    "sizeX": null,
-    "sizeY": null,
-    "soundEffect": null,
-    "delay": null,
-    "backgroundIMG": "BG_005.png",
-    "backgroundSound": null
-  },
-  {
-    "code": "SOUNDCHUNG_SpaceSound",
-    "script": "script2",
-    "group": "group_2",
-    "mode": 1,
-    "text": "Ít ai biết rằng, phần lớn các cơn đau đầu gối không bắt đầu từ khớp, mà từ một thói quen rất quen thuộc.",
-    "textSize": "30px",
-    "textStyle": 1,
-    "img": "CSK_doctor1.png",
-    "imgEffect": null,
-    "sizeX": null,
-    "sizeY": null,
-    "soundEffect": null,
-    "delay": 20,
-    "backgroundIMG": null,
-    "backgroundSound": null
-  }
+  [
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 1,
+      "type": 1,
+      "text": "xinchao1",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_001.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 1,
+      "type": 1,
+      "text": "xinchao2",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_001.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 2,
+      "type": 1,
+      "text": "tambiet1",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_001.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 2,
+      "type": 1,
+      "text": "tambiet2",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_001.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 3,
+      "type": 1,
+      "text": "hello1",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_001.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 3,
+      "type": 1,
+      "text": "helo2",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_001.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 4,
+      "type": 1,
+      "text": "goodbye1",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_001.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 4,
+      "type": 1,
+      "text": "goodbye2",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_001.png"
+    }
+  ],
+  [
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 1,
+      "type": 1,
+      "text": "xinchao1",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_002.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 1,
+      "type": 1,
+      "text": "xinchao2",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_002.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 2,
+      "type": 1,
+      "text": "tambiet1",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_002.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 2,
+      "type": 1,
+      "text": "tambiet2",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_002.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 3,
+      "type": 1,
+      "text": "hello1",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_002.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 3,
+      "type": 1,
+      "text": "helo2",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_002.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 4,
+      "type": 1,
+      "text": "goodbye1",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_002.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 4,
+      "type": 1,
+      "text": "goodbye2",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_002.png"
+    }
+  ]
 ]
