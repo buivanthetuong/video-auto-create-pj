@@ -1,0 +1,134 @@
+[
+  [
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 1,
+      "type": 1,
+      "text": "xinchao1",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_001.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 1,
+      "type": 1,
+      "text": "xinchao2",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_001.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 2,
+      "type": 1,
+      "text": "tambiet1",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_001.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 2,
+      "type": 1,
+      "text": "tambiet2",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_001.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 3,
+      "type": 1,
+      "text": "hello1",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_001.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 3,
+      "type": 1,
+      "text": "helo2",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_001.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 4,
+      "type": 1,
+      "text": "goodbye1",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_001.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 4,
+      "type": 1,
+      "text": "goodbye2",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_001.png"
+    }
+  ],
+  [
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 1,
+      "type": 1,
+      "text": "xinchao1",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_002.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 1,
+      "type": 1,
+      "text": "xinchao2",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_002.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 2,
+      "type": 1,
+      "text": "tambiet1",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_002.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 2,
+      "type": 1,
+      "text": "tambiet2",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_002.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 3,
+      "type": 1,
+      "text": "hello1",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_002.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 3,
+      "type": 1,
+      "text": "helo2",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_002.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 4,
+      "type": 1,
+      "text": "goodbye1",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_002.png"
+    },
+    {
+      "Code": "SOUNDCHUNG_SpaceSound",
+      "group": 4,
+      "type": 1,
+      "text": "goodbye2",
+      "img": "CSK_banchan.png",
+      "backgroundIMG": "BG_002.png"
+    }
+  ]
+]

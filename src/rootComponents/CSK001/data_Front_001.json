@@ -1,134 +1,94 @@
 [
   [
     {
-      "Code": "SOUNDCHUNG_SpaceSound",
+      "code": "SOUNDCHUNG_SpaceSound",
+      "script": null,
       "group": 1,
-      "type": 1,
-      "text": "xinchao1",
-      "img": "CSK_banchan.png",
-      "backgroundIMG": "BG_001.png"
+      "mode": 2,
+      "text": "Thưa bác sĩ, vì sao tôi bị đau vai dù không hề bị va chạm hay chấn thương gì?",
+      "textSize": "80px",
+      "textStyle": 1,
+      "img": null,
+      "imgStyle": 1,
+      "soundEffect": "soundEffect_success",
+      "delay": null,
+      "backgroundIMG": "BG_004.png",
+      "backgroundSound": "SOUNDCHUNG_1"
     },
     {
-      "Code": "SOUNDCHUNG_SpaceSound",
-      "group": 1,
-      "type": 1,
-      "text": "xinchao2",
-      "img": "CSK_banchan.png",
-      "backgroundIMG": "BG_001.png"
-    },
-    {
-      "Code": "SOUNDCHUNG_SpaceSound",
+      "code": "SOUNDCHUNG_SpaceSound",
+      "script": null,
       "group": 2,
-      "type": 1,
-      "text": "tambiet1",
-      "img": "CSK_banchan.png",
-      "backgroundIMG": "BG_001.png"
+      "mode": 1,
+      "text": "Trong đa số trường hợp, cơn đau này không đến từ chấn thương, mà xuất phát từ sự quá tải kéo dài bên trong cơ – khớp.",
+      "textSize": "55px",
+      "textStyle": 1,
+      "img": "CSK_lung.jpeg",
+      "imgStyle": 1,
+      "soundEffect": "soundEffect_swoosh",
+      "delay": null,
+      "backgroundIMG": "BG_004.png",
+      "backgroundSound": null
     },
     {
-      "Code": "SOUNDCHUNG_SpaceSound",
-      "group": 2,
-      "type": 1,
-      "text": "tambiet2",
-      "img": "CSK_banchan.png",
-      "backgroundIMG": "BG_001.png"
-    },
-    {
-      "Code": "SOUNDCHUNG_SpaceSound",
+      "code": "SOUNDCHUNG_SpaceSound",
+      "script": null,
       "group": 3,
-      "type": 1,
-      "text": "hello1",
-      "img": "CSK_banchan.png",
-      "backgroundIMG": "BG_001.png"
+      "mode": 1,
+      "text": "Cơ bị căng liên tục do tư thế sinh hoạt sai",
+      "textSize": "55px",
+      "textStyle": 1,
+      "img": "CSK_cobap.png",
+      "imgStyle": 1,
+      "soundEffect": "soundEffect_punch",
+      "delay": null,
+      "backgroundIMG": "BG_004.png",
+      "backgroundSound": null
     },
     {
-      "Code": "SOUNDCHUNG_SpaceSound",
+      "code": "SOUNDCHUNG_SpaceSound",
+      "script": null,
       "group": 3,
-      "type": 1,
-      "text": "helo2",
-      "img": "CSK_banchan.png",
-      "backgroundIMG": "BG_001.png"
+      "mode": 1,
+      "text": "Khớp thiếu vận động",
+      "textSize": "55px",
+      "textStyle": 1,
+      "img": "CSK_khop.png",
+      "imgStyle": 1,
+      "soundEffect": "soundEffect_suprise",
+      "delay": null,
+      "backgroundIMG": "BG_004.png",
+      "backgroundSound": null
     },
     {
-      "Code": "SOUNDCHUNG_SpaceSound",
-      "group": 4,
-      "type": 1,
-      "text": "goodbye1",
-      "img": "CSK_banchan.png",
-      "backgroundIMG": "BG_001.png"
-    },
-    {
-      "Code": "SOUNDCHUNG_SpaceSound",
-      "group": 4,
-      "type": 1,
-      "text": "goodbye2",
-      "img": "CSK_banchan.png",
-      "backgroundIMG": "BG_001.png"
-    }
-  ],
-  [
-    {
-      "Code": "SOUNDCHUNG_SpaceSound",
-      "group": 1,
-      "type": 1,
-      "text": "xinchao1",
-      "img": "CSK_banchan.png",
-      "backgroundIMG": "BG_002.png"
-    },
-    {
-      "Code": "SOUNDCHUNG_SpaceSound",
-      "group": 1,
-      "type": 1,
-      "text": "xinchao2",
-      "img": "CSK_banchan.png",
-      "backgroundIMG": "BG_002.png"
-    },
-    {
-      "Code": "SOUNDCHUNG_SpaceSound",
-      "group": 2,
-      "type": 1,
-      "text": "tambiet1",
-      "img": "CSK_banchan.png",
-      "backgroundIMG": "BG_002.png"
-    },
-    {
-      "Code": "SOUNDCHUNG_SpaceSound",
-      "group": 2,
-      "type": 1,
-      "text": "tambiet2",
-      "img": "CSK_banchan.png",
-      "backgroundIMG": "BG_002.png"
-    },
-    {
-      "Code": "SOUNDCHUNG_SpaceSound",
+      "code": "SOUNDCHUNG_SpaceSound",
+      "script": null,
       "group": 3,
-      "type": 1,
-      "text": "hello1",
-      "img": "CSK_banchan.png",
-      "backgroundIMG": "BG_002.png"
+      "mode": 1,
+      "text": "Thoái hóa âm thầm, diễn ra từ rất lâu mà không để ý",
+      "textSize": "55px",
+      "textStyle": 1,
+      "img": "CSK_cotsong.png",
+      "imgStyle": 1,
+      "soundEffect": "soundEffect_false",
+      "delay": null,
+      "backgroundIMG": "BG_004.png",
+      "backgroundSound": null
     },
     {
-      "Code": "SOUNDCHUNG_SpaceSound",
-      "group": 3,
-      "type": 1,
-      "text": "helo2",
-      "img": "CSK_banchan.png",
-      "backgroundIMG": "BG_002.png"
-    },
-    {
-      "Code": "SOUNDCHUNG_SpaceSound",
+      "code": "SOUNDCHUNG_SpaceSound",
+      "script": null,
       "group": 4,
-      "type": 1,
-      "text": "goodbye1",
-      "img": "CSK_banchan.png",
-      "backgroundIMG": "BG_002.png"
-    },
-    {
-      "Code": "SOUNDCHUNG_SpaceSound",
-      "group": 4,
-      "type": 1,
-      "text": "goodbye2",
-      "img": "CSK_banchan.png",
-      "backgroundIMG": "BG_002.png"
+      "mode": 3,
+      "text": null,
+      "textSize": null,
+      "textStyle": 1,
+      "img": "CSK_meo3.png",
+      "imgStyle": 1,
+      "soundEffect": "soundEffect_funnyspring",
+      "delay": null,
+      "backgroundIMG": "BG_004.png",
+      "backgroundSound": null
     }
   ]
 ]

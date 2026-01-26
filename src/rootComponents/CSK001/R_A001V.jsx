@@ -77,6 +77,15 @@ const FrameCalculator = ({ items, volume = 2, onDataReady }) => {
 
   const validItemsCount = items.filter((e) => getAudioPath(e) !== null).length;
 
+  const hasContinuedRef = React.useRef(false);
+
+  const safeContinueRender = () => {
+    if (!hasContinuedRef.current) {
+      continueRender(handle);
+      hasContinuedRef.current = true;
+    }
+  };
+
   useEffect(() => {
     if (validItemsCount === 0) {
       let accumulatedFrames = 0;
@@ -150,12 +159,12 @@ const FrameCalculator = ({ items, volume = 2, onDataReady }) => {
       setCodeFrame(tempCodeFrame);
       setImgFrame(mergedImgFrame);
       setIsLoading(false);
-      continueRender(handle);
+      safeContinueRender(handle);
       if (onDataReady) {
         onDataReady(tempCodeFrame, mergedImgFrame);
       }
     }
-  }, [validItemsCount, items, handle, fps, onDataReady]);
+  }, [validItemsCount, items, handle, onDataReady]);
 
   useEffect(() => {
     if (validItemsCount > 0 && loadingCount >= validItemsCount && isLoading) {
@@ -236,7 +245,7 @@ const FrameCalculator = ({ items, volume = 2, onDataReady }) => {
       setCodeFrame(tempCodeFrame);
       setImgFrame(mergedImgFrame);
       setIsLoading(false);
-      continueRender(handle);
+      safeContinueRender(handle);
       if (onDataReady) {
         onDataReady(tempCodeFrame, mergedImgFrame);
       }

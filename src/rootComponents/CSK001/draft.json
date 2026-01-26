@@ -4,7 +4,7 @@
       "actions": [
         {
           "cmd": "divAction",
-          "id": "BG001_1_undefined",
+          "id": "BG001_1",
           "ToEndFrame": true,
           "styleCss": {
             "position": "absolute",
@@ -16,9 +16,9 @@
         },
         {
           "cmd": "imageViewActionToID",
-          "toID": "BG001_1_undefined",
+          "toID": "BG001_1",
           "ToEndFrame": true,
-          "img": "BG_001.png",
+          "img": "BG_003.png",
           "styleCss": {
             "position": "absolute",
             "top": 0,
@@ -29,164 +29,86 @@
           }
         },
         {
-          "cmd": "soundPlayerAction",
-          "ToEndFrame": true,
-          "soundSource": "SOUNDCHUNG_tiktok-dongho"
-        },
-        {
           "cmd": "divAction",
-          "id": "div1_1_undefined",
+          "id": "main_1",
           "group": 1,
           "styleCss": {
             "position": "absolute",
             "height": "100%",
             "width": "100%",
+            "display": "flex",
+            "flexDirection": "column",
             "padding": "50px"
           }
         },
         {
           "cmd": "divAction",
-          "id": "divA_1_undefined",
-          "toID": "div1_1_undefined",
+          "id": "textCont_1",
+          "toID": "main_1",
           "group": 1,
           "styleCss": {
             "display": "flex",
             "alignItems": "center",
             "justifyContent": "center",
-            "height": "40%",
+            "height": "30%",
             "width": "100%"
           }
         },
         {
           "cmd": "typingText",
-          "text": "xinchao1",
-          "id": "text_1_undefined",
-          "toID": "divA_1_undefined",
+          "text": "Thưa bác sĩ, vì sao tôi bị đau vai dù không hề bị va chạm hay chấn thương gì?",
+          "toID": "textCont_1",
           "group": 1,
           "styleCss": {
-            "position": "absolute",
-            "top": "100px",
-            "fontSize": "70px",
-            "borderTop": "1px solid black",
-            "borderRadius": "20px",
-            "textAlign": "left",
-            "background": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            "padding": "20px",
-            "lineHeight": 1.75,
-            "letterSpacing": "0.5px",
-            "color": "#ffffff",
-            "zIndex": 2
-          }
-        },
-        { "cmd": "soundPlayerAction", "soundSource": "soundEffect_bublepop" },
-        {
-          "cmd": "divAction",
-          "id": "divB_1_undefined",
-          "toID": "div1_1_undefined",
-          "group": 1,
-          "styleCss": {
-            "display": "flex",
-            "flexDirection": "row",
-            "gap": "20px",
-            "height": "40%",
-            "padding": "50px"
-          }
-        },
-        {
-          "cmd": "divAction",
-          "id": "divC_1_undefined",
-          "toID": "divB_1_undefined",
-          "group": 1,
-          "styleCss": {
-            "flexBasis": "100%",
-            "flexShrink": 0,
-            "display": "flex",
-            "justifyContent": "center",
-            "alignItems": "center"
-          }
-        },
-        {
-          "cmd": "imageViewActionToID",
-          "img": "CSK_banchan.png",
-          "toID": "divC_1_undefined",
-          "group": 1,
-          "styleCss": {
-            "width": "600px",
-            "height": "600px",
-            "maxWidth": "100%",
-            "maxHeight": "100%",
-            "borderRadius": "20%"
-          }
-        },
-        {
-          "cmd": "divAction",
-          "id": "divD_1_undefined",
-          "toID": "divB_1_undefined",
-          "group": 1,
-          "styleCss": {
-            "height": "auto",
-            "flexGrow": 1,
-            "display": "flex",
-            "justifyContent": "center",
-            "alignItems": "center"
-          }
-        },
-        {
-          "cmd": "imageViewActionToID",
-          "img": "CSK_banchan.png",
-          "toID": "divD_1_undefined",
-          "group": 1,
-          "styleCss": {
-            "width": "600px",
-            "height": "600px",
-            "maxWidth": "100%",
-            "maxHeight": "100%"
-          }
-        }
-      ],
-      "code": null,
-      "timeFixed": 2,
-      "stt": 0
-    },
-    {
-      "actions": [
-        { "cmd": "soundPlayerAction", "soundSource": "soundEffect_flippage" },
-        {
-          "cmd": "actionCssId",
-          "toID": "text_1_undefined",
-          "mode": "replace",
-          "css": { "display": "none" }
-        },
-        {
-          "cmd": "typingText",
-          "text": "xinchao2",
-          "toID": "divA_1_undefined",
-          "delay": 15,
-          "group": 1,
-          "styleCss": {
+            "fontSize": "35px",
+            "fontWeight": 800,
+            "color": "yellow",
             "textAlign": "center",
-            "fontSize": "60px",
-            "fontWeight": 700,
-            "WebkitTextStroke": "2px yellow",
-            "color": "#fff"
+            "textTransform": "uppercase",
+            "WebkitTextStroke": "4px black",
+            "textShadow": "0 0 30px rgba(255,255,0,0.5)",
+            "letterSpacing": "3px"
+          }
+        },
+        { "cmd": "soundPlayerAction", "soundSource": "soundEffect_success" },
+        {
+          "cmd": "divAction",
+          "id": "imgCont_1",
+          "toID": "main_1",
+          "group": 1,
+          "styleCss": {
+            "display": "flex",
+            "alignItems": "center",
+            "justifyContent": "center",
+            "height": "70%",
+            "width": "100%"
           }
         },
         {
-          "cmd": "actionCssId",
-          "toID": "divC_1_undefined",
-          "mode": "add",
-          "css": { "animation": "collapseWidth 1s ease-in-out forwards" }
+          "cmd": "imageViewActionToID",
+          "img": null,
+          "toID": "imgCont_1",
+          "group": 1,
+          "styleCss": {
+            "width": "700px",
+            "height": "700px",
+            "maxWidth": "90%",
+            "maxHeight": "90%",
+            "objectFit": "contain",
+            "borderRadius": "20px",
+            "animation": "scaleUp 0.7s ease-out forwards"
+          }
         }
       ],
-      "code": null,
-      "timeFixed": 5,
-      "stt": 1
+      "code": "SOUNDCHUNG_SpaceSound",
+      "timeFixed": 4,
+      "stt": null
     },
     {
       "actions": [
         {
           "cmd": "divAction",
-          "id": "BG001_2_undefined",
+          "id": "BG001_2",
           "ToEndFrame": true,
           "styleCss": {
             "position": "absolute",
@@ -198,9 +120,9 @@
         },
         {
           "cmd": "imageViewActionToID",
-          "toID": "BG001_2_undefined",
+          "toID": "BG001_2",
           "ToEndFrame": true,
-          "img": "BG_001.png",
+          "img": "BG_003.png",
           "styleCss": {
             "position": "absolute",
             "top": 0,
@@ -211,164 +133,86 @@
           }
         },
         {
-          "cmd": "soundPlayerAction",
-          "ToEndFrame": true,
-          "soundSource": "SOUNDCHUNG_tiktok-dongho"
-        },
-        {
           "cmd": "divAction",
-          "id": "div1_2_undefined",
+          "id": "main_2",
           "group": 2,
           "styleCss": {
             "position": "absolute",
             "height": "100%",
             "width": "100%",
+            "display": "flex",
+            "flexDirection": "column",
             "padding": "50px"
           }
         },
         {
           "cmd": "divAction",
-          "id": "divA_2_undefined",
-          "toID": "div1_2_undefined",
+          "id": "textCont_2",
+          "toID": "main_2",
           "group": 2,
           "styleCss": {
             "display": "flex",
             "alignItems": "center",
             "justifyContent": "center",
-            "height": "40%",
+            "height": "30%",
             "width": "100%"
           }
         },
         {
           "cmd": "typingText",
-          "text": "tambiet1",
-          "id": "text_2_undefined",
-          "toID": "divA_2_undefined",
+          "text": "Trong đa số trường hợp, cơn đau này không đến từ chấn thương, mà xuất phát từ sự quá tải kéo dài bên trong cơ – khớp.",
+          "toID": "textCont_2",
           "group": 2,
           "styleCss": {
-            "position": "absolute",
-            "top": "100px",
-            "fontSize": "70px",
-            "borderTop": "1px solid black",
-            "borderRadius": "20px",
-            "textAlign": "left",
-            "background": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            "padding": "20px",
-            "lineHeight": 1.75,
-            "letterSpacing": "0.5px",
-            "color": "#ffffff",
-            "zIndex": 2
-          }
-        },
-        { "cmd": "soundPlayerAction", "soundSource": "soundEffect_bublepop" },
-        {
-          "cmd": "divAction",
-          "id": "divB_2_undefined",
-          "toID": "div1_2_undefined",
-          "group": 2,
-          "styleCss": {
-            "display": "flex",
-            "flexDirection": "row",
-            "gap": "20px",
-            "height": "40%",
-            "padding": "50px"
-          }
-        },
-        {
-          "cmd": "divAction",
-          "id": "divC_2_undefined",
-          "toID": "divB_2_undefined",
-          "group": 2,
-          "styleCss": {
-            "flexBasis": "100%",
-            "flexShrink": 0,
-            "display": "flex",
-            "justifyContent": "center",
-            "alignItems": "center"
-          }
-        },
-        {
-          "cmd": "imageViewActionToID",
-          "img": "CSK_banchan.png",
-          "toID": "divC_2_undefined",
-          "group": 2,
-          "styleCss": {
-            "width": "600px",
-            "height": "600px",
-            "maxWidth": "100%",
-            "maxHeight": "100%",
-            "borderRadius": "20%"
-          }
-        },
-        {
-          "cmd": "divAction",
-          "id": "divD_2_undefined",
-          "toID": "divB_2_undefined",
-          "group": 2,
-          "styleCss": {
-            "height": "auto",
-            "flexGrow": 1,
-            "display": "flex",
-            "justifyContent": "center",
-            "alignItems": "center"
-          }
-        },
-        {
-          "cmd": "imageViewActionToID",
-          "img": "CSK_banchan.png",
-          "toID": "divD_2_undefined",
-          "group": 2,
-          "styleCss": {
-            "width": "600px",
-            "height": "600px",
-            "maxWidth": "100%",
-            "maxHeight": "100%"
-          }
-        }
-      ],
-      "code": null,
-      "timeFixed": 2,
-      "stt": 0
-    },
-    {
-      "actions": [
-        { "cmd": "soundPlayerAction", "soundSource": "soundEffect_flippage" },
-        {
-          "cmd": "actionCssId",
-          "toID": "text_2_undefined",
-          "mode": "replace",
-          "css": { "display": "none" }
-        },
-        {
-          "cmd": "typingText",
-          "text": "tambiet2",
-          "toID": "divA_2_undefined",
-          "delay": 15,
-          "group": 2,
-          "styleCss": {
+            "fontSize": "35px",
+            "fontWeight": 800,
+            "color": "yellow",
             "textAlign": "center",
-            "fontSize": "60px",
-            "fontWeight": 700,
-            "WebkitTextStroke": "2px yellow",
-            "color": "#fff"
+            "textTransform": "uppercase",
+            "WebkitTextStroke": "4px black",
+            "textShadow": "0 0 30px rgba(255,255,0,0.5)",
+            "letterSpacing": "3px"
+          }
+        },
+        { "cmd": "soundPlayerAction", "soundSource": "soundEffect_swoosh" },
+        {
+          "cmd": "divAction",
+          "id": "imgCont_2",
+          "toID": "main_2",
+          "group": 2,
+          "styleCss": {
+            "display": "flex",
+            "alignItems": "center",
+            "justifyContent": "center",
+            "height": "70%",
+            "width": "100%"
           }
         },
         {
-          "cmd": "actionCssId",
-          "toID": "divC_2_undefined",
-          "mode": "add",
-          "css": { "animation": "collapseWidth 1s ease-in-out forwards" }
+          "cmd": "imageViewActionToID",
+          "img": "CSK_lung.jpeg",
+          "toID": "imgCont_2",
+          "group": 2,
+          "styleCss": {
+            "width": "700px",
+            "height": "700px",
+            "maxWidth": "90%",
+            "maxHeight": "90%",
+            "objectFit": "contain",
+            "borderRadius": "20px",
+            "animation": "scaleUp 0.7s ease-out forwards"
+          }
         }
       ],
-      "code": null,
-      "timeFixed": 5,
-      "stt": 1
+      "code": "SOUNDCHUNG_SpaceSound",
+      "timeFixed": 4,
+      "stt": null
     },
     {
       "actions": [
         {
           "cmd": "divAction",
-          "id": "BG001_3_undefined",
+          "id": "BG001_3",
           "ToEndFrame": true,
           "styleCss": {
             "position": "absolute",
@@ -380,9 +224,9 @@
         },
         {
           "cmd": "imageViewActionToID",
-          "toID": "BG001_3_undefined",
+          "toID": "BG001_3",
           "ToEndFrame": true,
-          "img": "BG_001.png",
+          "img": "BG_003.png",
           "styleCss": {
             "position": "absolute",
             "top": 0,
@@ -393,77 +237,45 @@
           }
         },
         {
-          "cmd": "soundPlayerAction",
-          "ToEndFrame": true,
-          "soundSource": "SOUNDCHUNG_tiktok-dongho"
-        },
-        {
           "cmd": "divAction",
-          "id": "div1_3_undefined",
+          "id": "mainDiv_3",
           "group": 3,
           "styleCss": {
             "position": "absolute",
             "height": "100%",
             "width": "100%",
-            "padding": "50px"
-          }
-        },
-        {
-          "cmd": "divAction",
-          "id": "divA_3_undefined",
-          "toID": "div1_3_undefined",
-          "group": 3,
-          "styleCss": {
+            "padding": "50px",
             "display": "flex",
-            "alignItems": "center",
-            "justifyContent": "center",
-            "height": "40%",
-            "width": "100%"
+            "flexDirection": "column",
+            "gap": "30px",
+            "justifyContent": "flex-start",
+            "alignItems": "center"
           }
         },
-        {
-          "cmd": "typingText",
-          "text": "hello1",
-          "id": "text_3_undefined",
-          "toID": "divA_3_undefined",
-          "group": 3,
-          "styleCss": {
-            "position": "absolute",
-            "top": "100px",
-            "fontSize": "70px",
-            "borderTop": "1px solid black",
-            "borderRadius": "20px",
-            "textAlign": "left",
-            "background": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            "padding": "20px",
-            "lineHeight": 1.75,
-            "letterSpacing": "0.5px",
-            "color": "#ffffff",
-            "zIndex": 2
-          }
-        },
-        { "cmd": "soundPlayerAction", "soundSource": "soundEffect_bublepop" },
         {
           "cmd": "divAction",
-          "id": "divB_3_undefined",
-          "toID": "div1_3_undefined",
+          "id": "div0_3",
+          "toID": "mainDiv_3",
           "group": 3,
           "styleCss": {
             "display": "flex",
             "flexDirection": "row",
             "gap": "20px",
-            "height": "40%",
-            "padding": "50px"
+            "width": "100%",
+            "height": "30%",
+            "alignItems": "center",
+            "opacity": 0,
+            "transform": "translateX(-100%)",
+            "transition": "all 0.8s ease-out"
           }
         },
         {
           "cmd": "divAction",
-          "id": "divC_3_undefined",
-          "toID": "divB_3_undefined",
+          "id": "div0Img_3",
+          "toID": "div0_3",
           "group": 3,
           "styleCss": {
-            "flexBasis": "100%",
-            "flexShrink": 0,
+            "flexBasis": "50%",
             "display": "flex",
             "justifyContent": "center",
             "alignItems": "center"
@@ -471,86 +283,221 @@
         },
         {
           "cmd": "imageViewActionToID",
-          "img": "CSK_banchan.png",
-          "toID": "divC_3_undefined",
+          "img": "CSK_cobap.png",
+          "toID": "div0Img_3",
           "group": 3,
           "styleCss": {
-            "width": "600px",
-            "height": "600px",
+            "width": "400px",
+            "height": "400px",
             "maxWidth": "100%",
             "maxHeight": "100%",
-            "borderRadius": "20%"
+            "borderRadius": "15px"
           }
         },
         {
           "cmd": "divAction",
-          "id": "divD_3_undefined",
-          "toID": "divB_3_undefined",
+          "id": "div0Text_3",
+          "toID": "div0_3",
           "group": 3,
           "styleCss": {
-            "height": "auto",
-            "flexGrow": 1,
+            "flexBasis": "50%",
             "display": "flex",
             "justifyContent": "center",
             "alignItems": "center"
           }
-        },
-        {
-          "cmd": "imageViewActionToID",
-          "img": "CSK_banchan.png",
-          "toID": "divD_3_undefined",
-          "group": 3,
-          "styleCss": {
-            "width": "600px",
-            "height": "600px",
-            "maxWidth": "100%",
-            "maxHeight": "100%"
-          }
-        }
-      ],
-      "code": null,
-      "timeFixed": 2,
-      "stt": 0
-    },
-    {
-      "actions": [
-        { "cmd": "soundPlayerAction", "soundSource": "soundEffect_flippage" },
-        {
-          "cmd": "actionCssId",
-          "toID": "text_3_undefined",
-          "mode": "replace",
-          "css": { "display": "none" }
         },
         {
           "cmd": "typingText",
-          "text": "helo2",
-          "toID": "divA_3_undefined",
-          "delay": 15,
+          "text": "Cơ bị căng liên tục do tư thế sinh hoạt sai",
+          "toID": "div0Text_3",
           "group": 3,
           "styleCss": {
-            "textAlign": "center",
-            "fontSize": "60px",
+            "fontSize": "30px",
             "fontWeight": 700,
-            "WebkitTextStroke": "2px yellow",
-            "color": "#fff"
+            "color": "#fff",
+            "textAlign": "center",
+            "WebkitTextStroke": "2px #000"
+          }
+        },
+        { "cmd": "soundPlayerAction", "soundSource": "soundEffect_punch" },
+        {
+          "cmd": "actionCssId",
+          "toID": "div0_3",
+          "mode": "replace",
+          "css": { "opacity": 1, "transform": "translateX(0)" }
+        },
+        {
+          "cmd": "divAction",
+          "id": "div1_3",
+          "toID": "mainDiv_3",
+          "group": 3,
+          "styleCss": {
+            "display": "flex",
+            "flexDirection": "row",
+            "gap": "20px",
+            "width": "100%",
+            "height": "30%",
+            "alignItems": "center",
+            "opacity": 0,
+            "transform": "translateX(100%)",
+            "transition": "all 0.8s ease-out"
           }
         },
         {
-          "cmd": "actionCssId",
-          "toID": "divC_3_undefined",
-          "mode": "add",
-          "css": { "animation": "collapseWidth 1s ease-in-out forwards" }
+          "cmd": "divAction",
+          "id": "div1Text_3",
+          "toID": "div1_3",
+          "group": 3,
+          "styleCss": {
+            "flexBasis": "50%",
+            "display": "flex",
+            "justifyContent": "center",
+            "alignItems": "center"
+          }
+        },
+        {
+          "cmd": "typingText",
+          "text": "Khớp thiếu vận động",
+          "toID": "div1Text_3",
+          "group": 3,
+          "styleCss": {
+            "fontSize": "35px",
+            "fontWeight": 700,
+            "color": "#fff",
+            "textAlign": "center",
+            "WebkitTextStroke": "2px #000"
+          }
+        },
+        {
+          "cmd": "divAction",
+          "id": "div1Img_3",
+          "toID": "div1_3",
+          "group": 3,
+          "styleCss": {
+            "flexBasis": "50%",
+            "display": "flex",
+            "justifyContent": "center",
+            "alignItems": "center"
+          }
+        },
+        {
+          "cmd": "imageViewActionToID",
+          "img": "CSK_khop.png",
+          "toID": "div1Img_3",
+          "group": 3,
+          "styleCss": {
+            "width": "400px",
+            "height": "400px",
+            "maxWidth": "100%",
+            "maxHeight": "100%",
+            "borderRadius": "15px"
+          }
+        },
+        {
+          "cmd": "divAction",
+          "id": "div2_3",
+          "toID": "mainDiv_3",
+          "group": 3,
+          "styleCss": {
+            "display": "flex",
+            "flexDirection": "row",
+            "gap": "20px",
+            "width": "100%",
+            "height": "30%",
+            "alignItems": "center",
+            "opacity": 0,
+            "transform": "translateX(-100%)",
+            "transition": "all 0.8s ease-out"
+          }
+        },
+        {
+          "cmd": "divAction",
+          "id": "div2Img_3",
+          "toID": "div2_3",
+          "group": 3,
+          "styleCss": {
+            "flexBasis": "50%",
+            "display": "flex",
+            "justifyContent": "center",
+            "alignItems": "center"
+          }
+        },
+        {
+          "cmd": "imageViewActionToID",
+          "img": "CSK_cotsong.png",
+          "toID": "div2Img_3",
+          "group": 3,
+          "styleCss": {
+            "width": "400px",
+            "height": "400px",
+            "maxWidth": "100%",
+            "maxHeight": "100%",
+            "borderRadius": "15px"
+          }
+        },
+        {
+          "cmd": "divAction",
+          "id": "div2Text_3",
+          "toID": "div2_3",
+          "group": 3,
+          "styleCss": {
+            "flexBasis": "50%",
+            "display": "flex",
+            "justifyContent": "center",
+            "alignItems": "center"
+          }
+        },
+        {
+          "cmd": "typingText",
+          "text": "Thoái hóa âm thầm, diễn ra từ rất lâu mà không để ý",
+          "toID": "div2Text_3",
+          "group": 3,
+          "styleCss": {
+            "fontSize": "30px",
+            "fontWeight": 700,
+            "color": "#fff",
+            "textAlign": "center",
+            "WebkitTextStroke": "2px #000"
+          }
         }
       ],
-      "code": null,
-      "timeFixed": 5,
-      "stt": 1
+      "code": "SOUNDCHUNG_SpaceSound",
+      "timeFixed": 3,
+      "stt": null
+    },
+    {
+      "actions": [
+        { "cmd": "soundPlayerAction", "soundSource": "soundEffect_suprise" },
+        {
+          "cmd": "actionCssId",
+          "toID": "div1_3",
+          "mode": "replace",
+          "css": { "opacity": 1, "transform": "translateX(0)" }
+        }
+      ],
+      "code": "SOUNDCHUNG_SpaceSound",
+      "timeFixed": 3,
+      "stt": null
+    },
+    {
+      "actions": [
+        { "cmd": "soundPlayerAction", "soundSource": "soundEffect_false" },
+        {
+          "cmd": "actionCssId",
+          "toID": "div2_3",
+          "mode": "replace",
+          "css": { "opacity": 1, "transform": "translateX(0)" }
+        }
+      ],
+      "code": "SOUNDCHUNG_SpaceSound",
+      "timeFixed": 3,
+      "stt": null
     },
     {
       "actions": [
         {
           "cmd": "divAction",
-          "id": "BG001_4_undefined",
+          "id": "BG001_4",
           "ToEndFrame": true,
           "styleCss": {
             "position": "absolute",
@@ -562,9 +509,9 @@
         },
         {
           "cmd": "imageViewActionToID",
-          "toID": "BG001_4_undefined",
+          "toID": "BG001_4",
           "ToEndFrame": true,
-          "img": "BG_001.png",
+          "img": "BG_003.png",
           "styleCss": {
             "position": "absolute",
             "top": 0,
@@ -575,888 +522,83 @@
           }
         },
         {
-          "cmd": "soundPlayerAction",
-          "ToEndFrame": true,
-          "soundSource": "SOUNDCHUNG_tiktok-dongho"
-        },
-        {
           "cmd": "divAction",
-          "id": "div1_4_undefined",
+          "id": "main_4",
           "group": 4,
           "styleCss": {
             "position": "absolute",
             "height": "100%",
             "width": "100%",
+            "display": "flex",
+            "flexDirection": "column",
             "padding": "50px"
           }
         },
         {
           "cmd": "divAction",
-          "id": "divA_4_undefined",
-          "toID": "div1_4_undefined",
+          "id": "textCont_4",
+          "toID": "main_4",
           "group": 4,
           "styleCss": {
             "display": "flex",
             "alignItems": "center",
             "justifyContent": "center",
-            "height": "40%",
+            "height": "30%",
             "width": "100%"
           }
         },
         {
           "cmd": "typingText",
-          "text": "goodbye1",
-          "id": "text_4_undefined",
-          "toID": "divA_4_undefined",
+          "text": null,
+          "toID": "textCont_4",
           "group": 4,
           "styleCss": {
-            "position": "absolute",
-            "top": "100px",
-            "fontSize": "70px",
-            "borderTop": "1px solid black",
-            "borderRadius": "20px",
-            "textAlign": "left",
-            "background": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            "padding": "20px",
-            "lineHeight": 1.75,
-            "letterSpacing": "0.5px",
-            "color": "#ffffff",
-            "zIndex": 2
-          }
-        },
-        { "cmd": "soundPlayerAction", "soundSource": "soundEffect_bublepop" },
-        {
-          "cmd": "divAction",
-          "id": "divB_4_undefined",
-          "toID": "div1_4_undefined",
-          "group": 4,
-          "styleCss": {
-            "display": "flex",
-            "flexDirection": "row",
-            "gap": "20px",
-            "height": "40%",
-            "padding": "50px"
-          }
-        },
-        {
-          "cmd": "divAction",
-          "id": "divC_4_undefined",
-          "toID": "divB_4_undefined",
-          "group": 4,
-          "styleCss": {
-            "flexBasis": "100%",
-            "flexShrink": 0,
-            "display": "flex",
-            "justifyContent": "center",
-            "alignItems": "center"
-          }
-        },
-        {
-          "cmd": "imageViewActionToID",
-          "img": "CSK_banchan.png",
-          "toID": "divC_4_undefined",
-          "group": 4,
-          "styleCss": {
-            "width": "600px",
-            "height": "600px",
-            "maxWidth": "100%",
-            "maxHeight": "100%",
-            "borderRadius": "20%"
-          }
-        },
-        {
-          "cmd": "divAction",
-          "id": "divD_4_undefined",
-          "toID": "divB_4_undefined",
-          "group": 4,
-          "styleCss": {
-            "height": "auto",
-            "flexGrow": 1,
-            "display": "flex",
-            "justifyContent": "center",
-            "alignItems": "center"
-          }
-        },
-        {
-          "cmd": "imageViewActionToID",
-          "img": "CSK_banchan.png",
-          "toID": "divD_4_undefined",
-          "group": 4,
-          "styleCss": {
-            "width": "600px",
-            "height": "600px",
-            "maxWidth": "100%",
-            "maxHeight": "100%"
-          }
-        }
-      ],
-      "code": null,
-      "timeFixed": 2,
-      "stt": 0
-    },
-    {
-      "actions": [
-        { "cmd": "soundPlayerAction", "soundSource": "soundEffect_flippage" },
-        {
-          "cmd": "actionCssId",
-          "toID": "text_4_undefined",
-          "mode": "replace",
-          "css": { "display": "none" }
-        },
-        {
-          "cmd": "typingText",
-          "text": "goodbye2",
-          "toID": "divA_4_undefined",
-          "delay": 15,
-          "group": 4,
-          "styleCss": {
+            "fontSize": null,
+            "fontWeight": 800,
+            "color": "yellow",
             "textAlign": "center",
-            "fontSize": "60px",
-            "fontWeight": 700,
-            "WebkitTextStroke": "2px yellow",
-            "color": "#fff"
-          }
-        },
-        {
-          "cmd": "actionCssId",
-          "toID": "divC_4_undefined",
-          "mode": "add",
-          "css": { "animation": "collapseWidth 1s ease-in-out forwards" }
-        }
-      ],
-      "code": null,
-      "timeFixed": 5,
-      "stt": 1
-    }
-  ],
-  [
-    {
-      "actions": [
-        {
-          "cmd": "divAction",
-          "id": "BG001_1_undefined",
-          "ToEndFrame": true,
-          "styleCss": {
-            "position": "absolute",
-            "top": 0,
-            "bottom": 0,
-            "left": 0,
-            "right": 0
-          }
-        },
-        {
-          "cmd": "imageViewActionToID",
-          "toID": "BG001_1_undefined",
-          "ToEndFrame": true,
-          "img": "BG_002.png",
-          "styleCss": {
-            "position": "absolute",
-            "top": 0,
-            "left": 0,
-            "width": "100%",
-            "height": "100%",
-            "objectFit": "cover"
+            "textTransform": "uppercase",
+            "WebkitTextStroke": "4px black",
+            "textShadow": "0 0 30px rgba(255,255,0,0.5)",
+            "letterSpacing": "3px"
           }
         },
         {
           "cmd": "soundPlayerAction",
-          "ToEndFrame": true,
-          "soundSource": "SOUNDCHUNG_tiktok-dongho"
+          "soundSource": "soundEffect_funnyspring"
         },
         {
           "cmd": "divAction",
-          "id": "div1_1_undefined",
-          "group": 1,
-          "styleCss": {
-            "position": "absolute",
-            "height": "100%",
-            "width": "100%",
-            "padding": "50px"
-          }
-        },
-        {
-          "cmd": "divAction",
-          "id": "divA_1_undefined",
-          "toID": "div1_1_undefined",
-          "group": 1,
-          "styleCss": {
-            "display": "flex",
-            "alignItems": "center",
-            "justifyContent": "center",
-            "height": "40%",
-            "width": "100%"
-          }
-        },
-        {
-          "cmd": "typingText",
-          "text": "xinchao1",
-          "id": "text_1_undefined",
-          "toID": "divA_1_undefined",
-          "group": 1,
-          "styleCss": {
-            "position": "absolute",
-            "top": "100px",
-            "fontSize": "70px",
-            "borderTop": "1px solid black",
-            "borderRadius": "20px",
-            "textAlign": "left",
-            "background": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            "padding": "20px",
-            "lineHeight": 1.75,
-            "letterSpacing": "0.5px",
-            "color": "#ffffff",
-            "zIndex": 2
-          }
-        },
-        { "cmd": "soundPlayerAction", "soundSource": "soundEffect_bublepop" },
-        {
-          "cmd": "divAction",
-          "id": "divB_1_undefined",
-          "toID": "div1_1_undefined",
-          "group": 1,
-          "styleCss": {
-            "display": "flex",
-            "flexDirection": "row",
-            "gap": "20px",
-            "height": "40%",
-            "padding": "50px"
-          }
-        },
-        {
-          "cmd": "divAction",
-          "id": "divC_1_undefined",
-          "toID": "divB_1_undefined",
-          "group": 1,
-          "styleCss": {
-            "flexBasis": "100%",
-            "flexShrink": 0,
-            "display": "flex",
-            "justifyContent": "center",
-            "alignItems": "center"
-          }
-        },
-        {
-          "cmd": "imageViewActionToID",
-          "img": "CSK_banchan.png",
-          "toID": "divC_1_undefined",
-          "group": 1,
-          "styleCss": {
-            "width": "600px",
-            "height": "600px",
-            "maxWidth": "100%",
-            "maxHeight": "100%",
-            "borderRadius": "20%"
-          }
-        },
-        {
-          "cmd": "divAction",
-          "id": "divD_1_undefined",
-          "toID": "divB_1_undefined",
-          "group": 1,
-          "styleCss": {
-            "height": "auto",
-            "flexGrow": 1,
-            "display": "flex",
-            "justifyContent": "center",
-            "alignItems": "center"
-          }
-        },
-        {
-          "cmd": "imageViewActionToID",
-          "img": "CSK_banchan.png",
-          "toID": "divD_1_undefined",
-          "group": 1,
-          "styleCss": {
-            "width": "600px",
-            "height": "600px",
-            "maxWidth": "100%",
-            "maxHeight": "100%"
-          }
-        }
-      ],
-      "code": null,
-      "timeFixed": 2,
-      "stt": 0
-    },
-    {
-      "actions": [
-        { "cmd": "soundPlayerAction", "soundSource": "soundEffect_flippage" },
-        {
-          "cmd": "actionCssId",
-          "toID": "text_1_undefined",
-          "mode": "replace",
-          "css": { "display": "none" }
-        },
-        {
-          "cmd": "typingText",
-          "text": "xinchao2",
-          "toID": "divA_1_undefined",
-          "delay": 15,
-          "group": 1,
-          "styleCss": {
-            "textAlign": "center",
-            "fontSize": "60px",
-            "fontWeight": 700,
-            "WebkitTextStroke": "2px yellow",
-            "color": "#fff"
-          }
-        },
-        {
-          "cmd": "actionCssId",
-          "toID": "divC_1_undefined",
-          "mode": "add",
-          "css": { "animation": "collapseWidth 1s ease-in-out forwards" }
-        }
-      ],
-      "code": null,
-      "timeFixed": 5,
-      "stt": 1
-    },
-    {
-      "actions": [
-        {
-          "cmd": "divAction",
-          "id": "BG001_2_undefined",
-          "ToEndFrame": true,
-          "styleCss": {
-            "position": "absolute",
-            "top": 0,
-            "bottom": 0,
-            "left": 0,
-            "right": 0
-          }
-        },
-        {
-          "cmd": "imageViewActionToID",
-          "toID": "BG001_2_undefined",
-          "ToEndFrame": true,
-          "img": "BG_002.png",
-          "styleCss": {
-            "position": "absolute",
-            "top": 0,
-            "left": 0,
-            "width": "100%",
-            "height": "100%",
-            "objectFit": "cover"
-          }
-        },
-        {
-          "cmd": "soundPlayerAction",
-          "ToEndFrame": true,
-          "soundSource": "SOUNDCHUNG_tiktok-dongho"
-        },
-        {
-          "cmd": "divAction",
-          "id": "div1_2_undefined",
-          "group": 2,
-          "styleCss": {
-            "position": "absolute",
-            "height": "100%",
-            "width": "100%",
-            "padding": "50px"
-          }
-        },
-        {
-          "cmd": "divAction",
-          "id": "divA_2_undefined",
-          "toID": "div1_2_undefined",
-          "group": 2,
-          "styleCss": {
-            "display": "flex",
-            "alignItems": "center",
-            "justifyContent": "center",
-            "height": "40%",
-            "width": "100%"
-          }
-        },
-        {
-          "cmd": "typingText",
-          "text": "tambiet1",
-          "id": "text_2_undefined",
-          "toID": "divA_2_undefined",
-          "group": 2,
-          "styleCss": {
-            "position": "absolute",
-            "top": "100px",
-            "fontSize": "70px",
-            "borderTop": "1px solid black",
-            "borderRadius": "20px",
-            "textAlign": "left",
-            "background": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            "padding": "20px",
-            "lineHeight": 1.75,
-            "letterSpacing": "0.5px",
-            "color": "#ffffff",
-            "zIndex": 2
-          }
-        },
-        { "cmd": "soundPlayerAction", "soundSource": "soundEffect_bublepop" },
-        {
-          "cmd": "divAction",
-          "id": "divB_2_undefined",
-          "toID": "div1_2_undefined",
-          "group": 2,
-          "styleCss": {
-            "display": "flex",
-            "flexDirection": "row",
-            "gap": "20px",
-            "height": "40%",
-            "padding": "50px"
-          }
-        },
-        {
-          "cmd": "divAction",
-          "id": "divC_2_undefined",
-          "toID": "divB_2_undefined",
-          "group": 2,
-          "styleCss": {
-            "flexBasis": "100%",
-            "flexShrink": 0,
-            "display": "flex",
-            "justifyContent": "center",
-            "alignItems": "center"
-          }
-        },
-        {
-          "cmd": "imageViewActionToID",
-          "img": "CSK_banchan.png",
-          "toID": "divC_2_undefined",
-          "group": 2,
-          "styleCss": {
-            "width": "600px",
-            "height": "600px",
-            "maxWidth": "100%",
-            "maxHeight": "100%",
-            "borderRadius": "20%"
-          }
-        },
-        {
-          "cmd": "divAction",
-          "id": "divD_2_undefined",
-          "toID": "divB_2_undefined",
-          "group": 2,
-          "styleCss": {
-            "height": "auto",
-            "flexGrow": 1,
-            "display": "flex",
-            "justifyContent": "center",
-            "alignItems": "center"
-          }
-        },
-        {
-          "cmd": "imageViewActionToID",
-          "img": "CSK_banchan.png",
-          "toID": "divD_2_undefined",
-          "group": 2,
-          "styleCss": {
-            "width": "600px",
-            "height": "600px",
-            "maxWidth": "100%",
-            "maxHeight": "100%"
-          }
-        }
-      ],
-      "code": null,
-      "timeFixed": 2,
-      "stt": 0
-    },
-    {
-      "actions": [
-        { "cmd": "soundPlayerAction", "soundSource": "soundEffect_flippage" },
-        {
-          "cmd": "actionCssId",
-          "toID": "text_2_undefined",
-          "mode": "replace",
-          "css": { "display": "none" }
-        },
-        {
-          "cmd": "typingText",
-          "text": "tambiet2",
-          "toID": "divA_2_undefined",
-          "delay": 15,
-          "group": 2,
-          "styleCss": {
-            "textAlign": "center",
-            "fontSize": "60px",
-            "fontWeight": 700,
-            "WebkitTextStroke": "2px yellow",
-            "color": "#fff"
-          }
-        },
-        {
-          "cmd": "actionCssId",
-          "toID": "divC_2_undefined",
-          "mode": "add",
-          "css": { "animation": "collapseWidth 1s ease-in-out forwards" }
-        }
-      ],
-      "code": null,
-      "timeFixed": 5,
-      "stt": 1
-    },
-    {
-      "actions": [
-        {
-          "cmd": "divAction",
-          "id": "BG001_3_undefined",
-          "ToEndFrame": true,
-          "styleCss": {
-            "position": "absolute",
-            "top": 0,
-            "bottom": 0,
-            "left": 0,
-            "right": 0
-          }
-        },
-        {
-          "cmd": "imageViewActionToID",
-          "toID": "BG001_3_undefined",
-          "ToEndFrame": true,
-          "img": "BG_002.png",
-          "styleCss": {
-            "position": "absolute",
-            "top": 0,
-            "left": 0,
-            "width": "100%",
-            "height": "100%",
-            "objectFit": "cover"
-          }
-        },
-        {
-          "cmd": "soundPlayerAction",
-          "ToEndFrame": true,
-          "soundSource": "SOUNDCHUNG_tiktok-dongho"
-        },
-        {
-          "cmd": "divAction",
-          "id": "div1_3_undefined",
-          "group": 3,
-          "styleCss": {
-            "position": "absolute",
-            "height": "100%",
-            "width": "100%",
-            "padding": "50px"
-          }
-        },
-        {
-          "cmd": "divAction",
-          "id": "divA_3_undefined",
-          "toID": "div1_3_undefined",
-          "group": 3,
-          "styleCss": {
-            "display": "flex",
-            "alignItems": "center",
-            "justifyContent": "center",
-            "height": "40%",
-            "width": "100%"
-          }
-        },
-        {
-          "cmd": "typingText",
-          "text": "hello1",
-          "id": "text_3_undefined",
-          "toID": "divA_3_undefined",
-          "group": 3,
-          "styleCss": {
-            "position": "absolute",
-            "top": "100px",
-            "fontSize": "70px",
-            "borderTop": "1px solid black",
-            "borderRadius": "20px",
-            "textAlign": "left",
-            "background": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            "padding": "20px",
-            "lineHeight": 1.75,
-            "letterSpacing": "0.5px",
-            "color": "#ffffff",
-            "zIndex": 2
-          }
-        },
-        { "cmd": "soundPlayerAction", "soundSource": "soundEffect_bublepop" },
-        {
-          "cmd": "divAction",
-          "id": "divB_3_undefined",
-          "toID": "div1_3_undefined",
-          "group": 3,
-          "styleCss": {
-            "display": "flex",
-            "flexDirection": "row",
-            "gap": "20px",
-            "height": "40%",
-            "padding": "50px"
-          }
-        },
-        {
-          "cmd": "divAction",
-          "id": "divC_3_undefined",
-          "toID": "divB_3_undefined",
-          "group": 3,
-          "styleCss": {
-            "flexBasis": "100%",
-            "flexShrink": 0,
-            "display": "flex",
-            "justifyContent": "center",
-            "alignItems": "center"
-          }
-        },
-        {
-          "cmd": "imageViewActionToID",
-          "img": "CSK_banchan.png",
-          "toID": "divC_3_undefined",
-          "group": 3,
-          "styleCss": {
-            "width": "600px",
-            "height": "600px",
-            "maxWidth": "100%",
-            "maxHeight": "100%",
-            "borderRadius": "20%"
-          }
-        },
-        {
-          "cmd": "divAction",
-          "id": "divD_3_undefined",
-          "toID": "divB_3_undefined",
-          "group": 3,
-          "styleCss": {
-            "height": "auto",
-            "flexGrow": 1,
-            "display": "flex",
-            "justifyContent": "center",
-            "alignItems": "center"
-          }
-        },
-        {
-          "cmd": "imageViewActionToID",
-          "img": "CSK_banchan.png",
-          "toID": "divD_3_undefined",
-          "group": 3,
-          "styleCss": {
-            "width": "600px",
-            "height": "600px",
-            "maxWidth": "100%",
-            "maxHeight": "100%"
-          }
-        }
-      ],
-      "code": null,
-      "timeFixed": 2,
-      "stt": 0
-    },
-    {
-      "actions": [
-        { "cmd": "soundPlayerAction", "soundSource": "soundEffect_flippage" },
-        {
-          "cmd": "actionCssId",
-          "toID": "text_3_undefined",
-          "mode": "replace",
-          "css": { "display": "none" }
-        },
-        {
-          "cmd": "typingText",
-          "text": "helo2",
-          "toID": "divA_3_undefined",
-          "delay": 15,
-          "group": 3,
-          "styleCss": {
-            "textAlign": "center",
-            "fontSize": "60px",
-            "fontWeight": 700,
-            "WebkitTextStroke": "2px yellow",
-            "color": "#fff"
-          }
-        },
-        {
-          "cmd": "actionCssId",
-          "toID": "divC_3_undefined",
-          "mode": "add",
-          "css": { "animation": "collapseWidth 1s ease-in-out forwards" }
-        }
-      ],
-      "code": null,
-      "timeFixed": 5,
-      "stt": 1
-    },
-    {
-      "actions": [
-        {
-          "cmd": "divAction",
-          "id": "BG001_4_undefined",
-          "ToEndFrame": true,
-          "styleCss": {
-            "position": "absolute",
-            "top": 0,
-            "bottom": 0,
-            "left": 0,
-            "right": 0
-          }
-        },
-        {
-          "cmd": "imageViewActionToID",
-          "toID": "BG001_4_undefined",
-          "ToEndFrame": true,
-          "img": "BG_002.png",
-          "styleCss": {
-            "position": "absolute",
-            "top": 0,
-            "left": 0,
-            "width": "100%",
-            "height": "100%",
-            "objectFit": "cover"
-          }
-        },
-        {
-          "cmd": "soundPlayerAction",
-          "ToEndFrame": true,
-          "soundSource": "SOUNDCHUNG_tiktok-dongho"
-        },
-        {
-          "cmd": "divAction",
-          "id": "div1_4_undefined",
-          "group": 4,
-          "styleCss": {
-            "position": "absolute",
-            "height": "100%",
-            "width": "100%",
-            "padding": "50px"
-          }
-        },
-        {
-          "cmd": "divAction",
-          "id": "divA_4_undefined",
-          "toID": "div1_4_undefined",
+          "id": "imgCont_4",
+          "toID": "main_4",
           "group": 4,
           "styleCss": {
             "display": "flex",
             "alignItems": "center",
             "justifyContent": "center",
-            "height": "40%",
+            "height": "70%",
             "width": "100%"
           }
         },
         {
-          "cmd": "typingText",
-          "text": "goodbye1",
-          "id": "text_4_undefined",
-          "toID": "divA_4_undefined",
+          "cmd": "imageViewActionToID",
+          "img": "CSK_meo3.png",
+          "toID": "imgCont_4",
           "group": 4,
           "styleCss": {
-            "position": "absolute",
-            "top": "100px",
-            "fontSize": "70px",
-            "borderTop": "1px solid black",
+            "width": "700px",
+            "height": "700px",
+            "maxWidth": "90%",
+            "maxHeight": "90%",
+            "objectFit": "contain",
             "borderRadius": "20px",
-            "textAlign": "left",
-            "background": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            "padding": "20px",
-            "lineHeight": 1.75,
-            "letterSpacing": "0.5px",
-            "color": "#ffffff",
-            "zIndex": 2
-          }
-        },
-        { "cmd": "soundPlayerAction", "soundSource": "soundEffect_bublepop" },
-        {
-          "cmd": "divAction",
-          "id": "divB_4_undefined",
-          "toID": "div1_4_undefined",
-          "group": 4,
-          "styleCss": {
-            "display": "flex",
-            "flexDirection": "row",
-            "gap": "20px",
-            "height": "40%",
-            "padding": "50px"
-          }
-        },
-        {
-          "cmd": "divAction",
-          "id": "divC_4_undefined",
-          "toID": "divB_4_undefined",
-          "group": 4,
-          "styleCss": {
-            "flexBasis": "100%",
-            "flexShrink": 0,
-            "display": "flex",
-            "justifyContent": "center",
-            "alignItems": "center"
-          }
-        },
-        {
-          "cmd": "imageViewActionToID",
-          "img": "CSK_banchan.png",
-          "toID": "divC_4_undefined",
-          "group": 4,
-          "styleCss": {
-            "width": "600px",
-            "height": "600px",
-            "maxWidth": "100%",
-            "maxHeight": "100%",
-            "borderRadius": "20%"
-          }
-        },
-        {
-          "cmd": "divAction",
-          "id": "divD_4_undefined",
-          "toID": "divB_4_undefined",
-          "group": 4,
-          "styleCss": {
-            "height": "auto",
-            "flexGrow": 1,
-            "display": "flex",
-            "justifyContent": "center",
-            "alignItems": "center"
-          }
-        },
-        {
-          "cmd": "imageViewActionToID",
-          "img": "CSK_banchan.png",
-          "toID": "divD_4_undefined",
-          "group": 4,
-          "styleCss": {
-            "width": "600px",
-            "height": "600px",
-            "maxWidth": "100%",
-            "maxHeight": "100%"
+            "animation": "scaleUp 0.7s ease-out forwards"
           }
         }
       ],
-      "code": null,
-      "timeFixed": 2,
-      "stt": 0
-    },
-    {
-      "actions": [
-        { "cmd": "soundPlayerAction", "soundSource": "soundEffect_flippage" },
-        {
-          "cmd": "actionCssId",
-          "toID": "text_4_undefined",
-          "mode": "replace",
-          "css": { "display": "none" }
-        },
-        {
-          "cmd": "typingText",
-          "text": "goodbye2",
-          "toID": "divA_4_undefined",
-          "delay": 15,
-          "group": 4,
-          "styleCss": {
-            "textAlign": "center",
-            "fontSize": "60px",
-            "fontWeight": 700,
-            "WebkitTextStroke": "2px yellow",
-            "color": "#fff"
-          }
-        },
-        {
-          "cmd": "actionCssId",
-          "toID": "divC_4_undefined",
-          "mode": "add",
-          "css": { "animation": "collapseWidth 1s ease-in-out forwards" }
-        }
-      ],
-      "code": null,
-      "timeFixed": 5,
-      "stt": 1
+      "code": "SOUNDCHUNG_SpaceSound",
+      "timeFixed": 4,
+      "stt": null
     }
   ]
 ]
