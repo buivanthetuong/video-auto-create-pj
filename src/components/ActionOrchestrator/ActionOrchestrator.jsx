@@ -152,9 +152,6 @@ function ActionOrchestrator({ codeFrame = [], textEnd }) {
     // Lấy ActionComponent từ registry
     const ActionComponent = ACTION_REGISTRY[action.cmd];
     if (!ActionComponent) {
-      console.warn(
-        `[ActionOrchestrator] ⚠️ Unknown action cmd: "${action.cmd}"`,
-      );
       return null;
     }
 

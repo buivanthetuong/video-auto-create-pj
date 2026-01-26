@@ -292,11 +292,11 @@ export const VideoTemplate = ({ item, duration }) => {
   const [imgFrame, setImgFrame] = useState([]);
   const [isDataReady, setIsDataReady] = useState(false);
 
-  const handleDataReady = (codeFrameData, imgFrameData) => {
+  const handleDataReady = React.useCallback((codeFrameData, imgFrameData) => {
     setCodeFrame(codeFrameData);
     setImgFrame(imgFrameData);
     setIsDataReady(true);
-  };
+  }, []);
 
   return (
     <div

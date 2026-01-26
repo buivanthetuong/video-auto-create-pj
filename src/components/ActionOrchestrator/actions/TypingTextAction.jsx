@@ -67,7 +67,7 @@ function TypingTextAction({ data }) {
       return null;
     }
 
-    console.log("🎯 TypingTextAction rendering to ID:", action.toID);
+    // console.log("🎯 TypingTextAction rendering to ID:", action.toID);
 
     // ⭐ Dùng React Portal để render vào element có ID
     return createPortal(typingTextComponent, targetElement);

@@ -27,7 +27,7 @@ function ImageViewAction({ data }) {
 
   if (!img) return null;
 
-  console.log(action.toID, "toIDImg");
+  // console.log(action.toID, "toIDImg");
 
   // ✅ Merge styles
   const mergedStyle = mergeStyles(

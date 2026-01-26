@@ -47,7 +47,7 @@ function VideoViewAction({ data }) {
       return null;
     }
 
-    console.log("🎬 VideoViewAction rendering to ID:", action.toID);
+    // console.log("🎬 VideoViewAction rendering to ID:", action.toID);
 
     // ⭐ Dùng React Portal để render vào element có ID
     return createPortal(
