@@ -65,6 +65,16 @@ function handleItem(group) {
 let videoData01 = [];
 
 DataFront.forEach((videoData) => {
+  const bg_sound = {
+    actions: [
+      {
+        cmd: CMD_Fetch.soundPlayerAction,
+        soundSource: " ",
+      },
+    ],
+    code: arr[0].code,
+    timeFixed: 3,
+  };
   let video = [];
   let group = [];
   let flag = videoData[0].group;
