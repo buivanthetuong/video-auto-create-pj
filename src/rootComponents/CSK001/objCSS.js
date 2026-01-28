@@ -3,11 +3,10 @@
 const ObjCSS = {
   textCSS: {
     textCss_001: {
-      position: "absolute",
-      top: "100px",
+      fontWeight: 900,
       borderTop: "1px solid black",
       borderRadius: "20px",
-      textAlign: "left",
+      textAlign: "center",
       background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
       padding: "20px",
       lineHeight: 1.75,
@@ -16,7 +15,7 @@ const ObjCSS = {
       zIndex: 2,
     },
     textCss_hook: {
-      fontWeight: 600,
+      fontWeight: 800,
       lineHeight: 1.6,
       letterSpacing: "0.3px",
       color: "#ffffff",

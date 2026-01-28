@@ -15,53 +15,13 @@
     opacity: 1;
   }
 }
-
-/* hieu ung slide */
+/* hieu ung slide collapse */
 @keyframes collapseWidth {
   from {
     flex-basis: 100%;
   }
   to {
     flex-basis: 0%;
-  }
-}
-
-/* ⭐ Scale 0.3 → 1 */
-@keyframes scaleUp {
-  0% {
-    transform: scale(0.3);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-/* ⭐ Pulse (với opacity) */
-@keyframes pulse {
-  0%,
-  100% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0.95;
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.1);
-    opacity: 1;
-  }
-}
-
-/* ⭐ Ken Burns (Scale + Pan) */
-@keyframes kenBurns {
-  0% {
-    transform: translate(-50%, -50%) scale(1);
-  }
-  100% {
-    transform: translate(-45%, -55%) scale(1.2);
   }
 }
 
@@ -74,7 +34,6 @@
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
-
 /* ⭐ Zoom In/Out */
 @keyframes zoomInOut {
   0%,
@@ -92,40 +51,17 @@
   }
 }
 
-@keyframes fadeInScale {
-  0% {
-    opacity: 0;
-    transform: scale(0);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
 /* ⭐ Fade In + Scale - Từ không có gì */
 @keyframes fadeInScale {
   0% {
     opacity: 0;
-    transform: scale(0.8);
+    transform: scale(0.6);
   }
   100% {
     opacity: 1;
     transform: scale(1);
   }
 }
-
-/* ⭐ Fade In + Slide Up - Từ không có gì */
-@keyframes fadeInSlideUp {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* ⭐ Fade In + Slide From Left */
 @keyframes fadeInSlideLeft {
   0% {
@@ -135,6 +71,28 @@
   100% {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+/* fade and slide from right */
+@keyframes fadeInSlideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+/* fade and slide from bottom */
+@keyframes fadeInSlideBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -152,7 +110,6 @@
     transform: scale(1);
   }
 }
-
 /* ⭐ Zoom In - Phóng to từ trung tâm */
 @keyframes zoomIn {
   0% {
