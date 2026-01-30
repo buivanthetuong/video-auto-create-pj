@@ -35,7 +35,7 @@ const TypingText = ({
   const animations = dataAction.animations || data.animations || [];
   const animationStyles = useAnimations(animations);
 
-  const typingDuration = 2; // 3 giây
+  const typingDuration = 0.5; // 3 giây
   const typingFrames = typingDuration * fps;
 
   if (frame < startFrame || frame > endFrame) return null;

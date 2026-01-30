@@ -8,12 +8,12 @@
       "text": "🧐 Đây là khớp nào trên cơ thể?",
       "textStyle": 2,
       "textEffect": null,
-      "img": "CSK_question1.png",
+      "img": "CSK_thaiduongham.png",
       "imgStyle": "1",
-      "imgEffect": null,
-      "soundEffect": "soundEffect_success",
+      "imgEffect": "fadeInScale",
+      "soundEffect": "soundEffect_suprise",
       "backgroundIMG": "BG_005.png",
-      "backgroundSound": "SOUNDCHUNG_baroque_vuivl"
+      "backgroundSound": "SOUNDCHUNG_1"
     },
     {
       "code": "CSK002_002",
@@ -26,7 +26,7 @@
       "img": null,
       "imgStyle": null,
       "imgEffect": null,
-      "soundEffect": "soundEffect_success",
+      "soundEffect": "soundEffect_flippage",
       "backgroundIMG": "BG_005.png",
       "backgroundSound": null
     },
@@ -41,7 +41,7 @@
       "img": null,
       "imgStyle": null,
       "imgEffect": null,
-      "soundEffect": "soundEffect_success",
+      "soundEffect": "soundEffect_flippage",
       "backgroundIMG": "BG_005.png",
       "backgroundSound": null
     },
@@ -56,7 +56,7 @@
       "img": null,
       "imgStyle": null,
       "imgEffect": null,
-      "soundEffect": "soundEffect_success",
+      "soundEffect": "soundEffect_flippage",
       "backgroundIMG": "BG_005.png",
       "backgroundSound": null
     },
@@ -71,7 +71,7 @@
       "img": null,
       "imgStyle": null,
       "imgEffect": null,
-      "soundEffect": "soundEffect_success",
+      "soundEffect": null,
       "backgroundIMG": "BG_005.png",
       "backgroundSound": null
     },
@@ -101,7 +101,7 @@
       "img": "CSK_chew.png",
       "imgStyle": "1",
       "imgEffect": null,
-      "soundEffect": "soundEffect_success",
+      "soundEffect": "soundEffect_funnyspring",
       "backgroundIMG": "BG_005.png",
       "backgroundSound": null
     },
@@ -116,7 +116,7 @@
       "img": "CSK_alert.png",
       "imgStyle": "1",
       "imgEffect": null,
-      "soundEffect": "soundEffect_success",
+      "soundEffect": "soundEffect_whistleup",
       "backgroundIMG": "BG_005.png",
       "backgroundSound": null
     },
@@ -131,7 +131,7 @@
       "img": "CSK_daurang.png",
       "imgStyle": "1",
       "imgEffect": null,
-      "soundEffect": "soundEffect_success",
+      "soundEffect": "soundEffect_pop",
       "backgroundIMG": "BG_005.png",
       "backgroundSound": null
     },
@@ -146,7 +146,7 @@
       "img": "CSK_pain.png",
       "imgStyle": "1",
       "imgEffect": null,
-      "soundEffect": "soundEffect_success",
+      "soundEffect": "soundEffect_pop",
       "backgroundIMG": "BG_005.png",
       "backgroundSound": null
     },
@@ -161,7 +161,7 @@
       "img": "CSK_headache.png",
       "imgStyle": "1",
       "imgEffect": null,
-      "soundEffect": "soundEffect_success",
+      "soundEffect": "soundEffect_pop",
       "backgroundIMG": "BG_005.png",
       "backgroundSound": null
     },
@@ -176,7 +176,7 @@
       "img": "CSK_008.png",
       "imgStyle": "1",
       "imgEffect": null,
-      "soundEffect": "soundEffect_success",
+      "soundEffect": "soundEffect_pop",
       "backgroundIMG": "BG_005.png",
       "backgroundSound": null
     },
